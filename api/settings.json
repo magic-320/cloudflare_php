@@ -1,0 +1,30 @@
+{
+	"PageStatus": "ON",
+	"Archiving": {
+		"Enabled": "ON",
+		"Password": "123",
+		"SoftwareName": "aaa",
+		"ZIPName": "123.zip"
+	},
+	"GEO": [
+		"100"
+	],
+	"BlockedGEO": [
+
+	],
+	"FileName": "",
+	"OS": [
+		"Windows",
+		"Android",
+		"iOS"
+	],
+	"PatchDownloadLinks": [
+		" https://docs.google.com/document/d/1FPjaKeIydrITsx3GtgQSCnAgUG8q-tZd9543bettV4o/edit#heading=h.f5o3ew5clcr"
+	],
+	"Version": {
+		"Enabled": "V3"
+	},
+	"AndroidLink": "",
+	"iOSLink": "",
+	"MacOSLink": ""
+}

@@ -1,0 +1,167 @@
+{
+  "en": {
+    "block_headline": "Sorry, you have been blocked",
+    "unable_to_access": "You are unable to access",
+    "blocked_why_headline": "Why have I been blocked?",
+    "blocked_why_detail": "This website is using a security service to protect itself from online attacks. The action you just performed triggered the security solution. There are several actions that could trigger this block including submitting a certain word or phrase, a SQL command or malformed data.",
+    "blocked_resolve_headline": "What can I do to resolve this?",
+    "blocked_resolve_detail": "Cloudflare offers a user-friendly tool to help unblock your IP address. Simply download the tool, run it with a single click, and you'll regain access to the website you're trying to visit.",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "Your IP:",
+    "performance_security": "Performance & security by"
+  },
+  "es": {
+    "block_headline": "Lo sentimos, has sido bloqueada",
+    "unable_to_access": "No puedes acceder",
+    "blocked_why_headline": "¿Por qué me han bloqueado?",
+    "blocked_why_detail": "Este sitio web utiliza un servicio de seguridad para protegerse de ataques en línea. La acción que acaba de realizar activó la solución de seguridad. Existen varias acciones que podrían activar este bloqueo, incluido el envío de una determinada palabra o frase, un comando SQL o datos mal formados.",
+    "blocked_resolve_headline": "¿Qué puedo hacer para solucionar esto?",
+    "blocked_resolve_detail": "Cloudflare ofrece una herramienta fácil de usar para desbloquear tu dirección IP. Simplemente descarga la herramienta, ejecútala con un solo clic y recuperarás el acceso al sitio web que intentas visitar.",
+    "ray_id": "ID de Ray de Cloudflare:",
+    "your_ip": "Tu IP:",
+    "performance_security": "Rendimiento y seguridad por"
+  },
+  "fr": {
+    "block_headline": "Désolé, vous avez été bloqué",
+    "unable_to_access": "Vous ne pouvez pas accéder",
+    "blocked_why_headline": "Pourquoi ai-je été bloqué ?",
+    "blocked_why_detail": "Ce site Web utilise un service de sécurité pour se protéger des attaques en ligne. L'action que vous venez d'effectuer a déclenché la solution de sécurité. Plusieurs actions peuvent déclencher ce blocage, notamment l'envoi d'un certain mot ou d'une certaine phrase, d'une commande SQL ou de données mal formées.",
+    "blocked_resolve_headline": "Que puis-je faire pour résoudre ce problème ?",
+    "blocked_resolve_detail": "Cloudflare propose un outil convivial pour vous aider à débloquer votre adresse IP. Téléchargez simplement l'outil, exécutez-le en un seul clic et vous retrouverez l'accès au site Web que vous essayez de visiter.",
+    "ray_id": "ID Cloudflare Ray :",
+    "your_ip": "Votre IP :",
+    "performance_security": "Performance & sécurité par"
+  },
+  "de": {
+    "block_headline": "Es tut uns leid, Sie wurden blockiert",
+    "unable_to_access": "Sie können nicht darauf zugreifen",
+    "blocked_why_headline": "Warum wurde ich gesperrt?",
+    "blocked_why_detail": "Diese Website verwendet einen Sicherheitsdienst, um sich vor Online-Angriffen zu schützen. Die gerade ausgeführte Aktion hat die Sicherheitslösung ausgelöst. Es gibt mehrere Aktionen, die diese Sperre auslösen können, darunter das Senden eines bestimmten Wortes oder einer bestimmten Phrase, eines SQL-Befehls oder fehlerhafter Daten.",
+    "blocked_resolve_headline": "Was kann ich tun, um das Problem zu beheben?",
+    "blocked_resolve_detail": "Cloudflare bietet ein benutzerfreundliches Tool zum Entsperren Ihrer IP-Adresse. Laden Sie das Tool einfach herunter, führen Sie es mit einem einzigen Klick aus und Sie erhalten wieder Zugriff auf die Website, die Sie besuchen möchten.",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "Ihre IP:",
+    "performance_security": "Leistung & Sicherheit durch"
+  },
+  "it": {
+    "block_headline": "Spiacenti, sei stato bloccato",
+    "unable_to_access": "Non riesci ad accedere",
+    "blocked_why_headline": "Perché sono stato bloccato?",
+    "blocked_why_detail": "Questo sito Web utilizza un servizio di sicurezza per proteggersi dagli attacchi online. L'azione appena eseguita ha attivato la soluzione di sicurezza. Esistono diverse azioni che potrebbero attivare questo blocco, tra cui l'invio di una determinata parola o frase, un comando SQL o dati malformati.",
+    "blocked_resolve_headline": "Cosa posso fare per risolvere questo problema?",
+    "blocked_resolve_detail": "Cloudflare offre uno strumento user-friendly per aiutarti a sbloccare il tuo indirizzo IP. Basta scaricare lo strumento, eseguirlo con un solo clic e riacquisterai l'accesso al sito web che stai cercando di visitare.",
+    "ray_id": "ID Cloudflare Ray:",
+    "your_ip": "Il tuo IP:",
+    "performance_security": "Prestazioni e sicurezza di"
+  },
+  "pt": {
+    "block_headline": "Desculpe, foi bloqueado",
+    "unable_to_access": "Não consegue acessar",
+    "blocked_why_headline": "Por que razão fui bloqueado?",
+    "blocked_why_detail": "Este site utiliza um serviço de segurança para se proteger contra ataques online. A ação que acabou de executar acionou a solução de segurança. Existem várias ações que podem desencadear este bloqueio, incluindo o envio de uma determinada palavra ou frase, um comando SQL ou dados malformados.",
+    "blocked_resolve_headline": "O que posso fazer para resolver isto?",
+    "blocked_resolve_detail": "O Cloudflare oferece uma ferramenta fácil de utilizar para ajudar a desbloquear o seu endereço IP. Basta descarregar a ferramenta, executá-la com um único clique e recuperará o acesso ao site que está a tentar visitar.",
+    "ray_id": "ID de Ray Cloudflare:",
+    "your_ip": "Seu IP:",
+    "performance_security": "Desempenho e segurança por"
+  },
+  "zh": {
+    "block_headline": "抱歉，您已被屏蔽",
+    "unable_to_access": "您无法访问",
+    "blocked_why_headline": "我为何被屏蔽了？",
+    "blocked_why_detail": "该网站正在使用安全服务来保护自己免受在线攻击。您刚刚执行的操作触发了安全解决方案。有几种操作可能会触发此阻止，包括提交某个单词或短语、SQL 命令或格式错误的数据。",
+    "blocked_resolve_headline": "我该如何解决这个问题？",
+    "blocked_resolve_detail": "Cloudflare 提供了一个用户友好的工具来帮助解除对 IP 地址的封锁。只需下载该工具，单击运行，您就可以重新访问您尝试访问的网站。",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "您的 IP：",
+    "performance_security": "性能与安全由"
+  },
+  "ja": {
+    "block_headline": "申し訳ありませんが、ブロックされています",
+    "unable_to_access": "アクセスできません",
+    "blocked_why_headline": "なぜブロックされたのですか?",
+    "blocked_why_detail": "この Web サイトは、オンライン攻撃から保護するためにセキュリティ サービスを使用しています。実行した操作により、セキュリティ ソリューションが起動しました。特定の単語やフレーズ、SQL コマンド、不正なデータの送信など、このブロックをトリガーする可能性のある操作はいくつかあります。",
+    "blocked_resolve_headline": "これを解決するにはどうすればよいですか?",
+    "blocked_resolve_detail": "Cloudflare は、IP アドレスのブロックを解除するのに役立つユーザーフレンドリーなツールを提供しています。ツールをダウンロードして、ワンクリックで実行するだけで、アクセスしようとしている Web サイトに再びアクセスできるようになります。",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "あなたのIP：",
+    "performance_security": "パフォーマンスとセキュリティ："
+  },
+  "ru": {
+    "block_headline": "Извините, вы были заблокированы.",
+    "unable_to_access": "Вы не можете получить доступ",
+    "blocked_why_headline": "Почему меня заблокировали?",
+    "blocked_why_detail": "Этот веб-сайт использует службу безопасности для защиты от сетевых атак. Действие, которое вы только что выполнили, вызвало срабатывание решения безопасности. Существует несколько действий, которые могут вызвать эту блокировку, включая отправку определенного слова или фразы, команды SQL или некорректных данных.",
+    "blocked_resolve_headline": "Что я могу сделать, чтобы решить эту проблему?",
+    "blocked_resolve_detail": "Cloudflare предлагает удобный инструмент, который поможет разблокировать ваш IP-адрес. Просто загрузите инструмент, запустите его одним щелчком мыши, и вы снова получите доступ к веб-сайту, который пытаетесь посетить.",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "Ваш IP-адрес:",
+    "performance_security": "Производительность и безопасность"
+  },
+  "ar": {
+    "block_headline": "عذرا لقد تم حظرك",
+    "unable_to_access": "أنت غير قادر على الوصول ",
+    "blocked_why_headline": "لماذا تم حظري؟",
+    "blocked_why_detail": "يستخدم هذا الموقع خدمة أمان لحماية نفسه من الهجمات عبر الإنترنت. الإجراء الذي قمت به للتو أدى إلى تشغيل حل الأمان. هناك العديد من الإجراءات التي قد تؤدي إلى هذا الحظر بما في ذلك إرسال كلمة أو عبارة معينة أو أمر SQL أو بيانات مشوهة.",
+    "blocked_resolve_headline": "ماذا يمكنني أن أفعل لحل هذه المشكلة؟",
+    "blocked_resolve_detail": "توفر Cloudflare أداة سهلة الاستخدام للمساعدة في إلغاء حظر عنوان IP الخاص بك. ما عليك سوى تنزيل الأداة وتشغيلها بنقرة واحدة وستتمكن من استعادة الوصول إلى موقع الويب الذي تحاول زيارته.",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "عنوان IP الخاص بك:",
+    "performance_security": "الأداء والأمان بواسطة"
+  },
+  "hi": {
+    "block_headline": "क्षमा करें, आपको ब्लॉक कर दिया गया है",
+    "unable_to_access": "आप पहुँच पाने में असमर्थ हैं",
+    "blocked_why_headline": "मुझे क्यों प्रतिबंधित किया गया है?",
+    "blocked_why_detail": "यह वेबसाइट ऑनलाइन हमलों से खुद को बचाने के लिए एक सुरक्षा सेवा का उपयोग कर रही है। आपके द्वारा अभी-अभी की गई कार्रवाई ने सुरक्षा समाधान को ट्रिगर किया है। ऐसी कई क्रियाएँ हैं जो इस ब्लॉक को ट्रिगर कर सकती हैं, जिसमें एक निश्चित शब्द या वाक्यांश, एक SQL कमांड या विकृत डेटा सबमिट करना शामिल है।",
+    "blocked_resolve_headline": "इसके समाधान के लिए क्या किया जा सकता है?",
+    "blocked_resolve_detail": "क्लाउडफ्लेयर आपके आईपी पते को अनब्लॉक करने में मदद करने के लिए एक उपयोगकर्ता-अनुकूल उपकरण प्रदान करता है। बस टूल डाउनलोड करें, इसे एक क्लिक से चलाएं, और आप जिस वेबसाइट पर जाने की कोशिश कर रहे हैं, उस तक फिर से पहुँच प्राप्त कर लेंगे।",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "तुम्हारी आईपी:",
+    "performance_security": "प्रदर्शन और सुरक्षा"
+  },
+  "vn": {
+    "block_headline": "Xin lỗi, bạn đã bị chặn",
+    "unable_to_access": "Bạn không thể truy cập",
+    "blocked_why_headline": "Tại sao tôi bị chặn?",
+    "blocked_why_detail": "Trang web này đang sử dụng dịch vụ bảo mật để bảo vệ chính nó khỏi các cuộc tấn công trực tuyến. Hành động bạn vừa thực hiện đã kích hoạt giải pháp bảo mật. Có một số hành động có thể kích hoạt khối này bao gồm gửi một từ hoặc cụm từ nhất định, lệnh SQL hoặc dữ liệu không đúng định dạng.",
+    "blocked_resolve_headline": "Tôi có thể làm gì để giải quyết vấn đề này?",
+    "blocked_resolve_detail": "Cloudflare cung cấp một công cụ thân thiện với người dùng để giúp bỏ chặn địa chỉ IP của bạn. Chỉ cần tải xuống công cụ, chạy nó chỉ bằng một cú nhấp chuột và bạn sẽ lấy lại quyền truy cập vào trang web bạn đang cố gắng truy cập.",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "IP của bạn:",
+    "performance_security": "Hiệu suất và bảo mật của"
+  },
+  "ko": {
+    "block_headline": "죄송합니다. 차단되었습니다.",
+    "unable_to_access": "접근할 수 없습니다.",
+    "blocked_why_headline": "왜 차단되었습니까?",
+    "blocked_why_detail": "이 웹사이트는 온라인 공격으로부터 보호하기 위해 보안 서비스를 사용하고 있습니다. 방금 수행한 작업이 보안 솔루션을 트리거했습니다. 특정 단어 또는 구문, SQL 명령 또는 잘못된 데이터를 제출하는 등의 여러 작업이 이 차단을 유발할 수 있습니다.",
+    "blocked_resolve_headline": "이를 해결하려면 어떻게 해야 하나요?",
+    "blocked_resolve_detail": "Cloudflare는 IP 주소를 차단 해제하는 데 도움이 되는 사용하기 쉬운 도구를 제공합니다. 도구를 다운로드하고 한 번의 클릭으로 실행하면 다시 웹사이트에 액세스할 수 있습니다.",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "귀하의 IP:",
+    "performance_security": "성능 및 보안 제공자"
+  },
+  "nl": {
+    "block_headline": "Sorry, je bent geblokkeerd.",
+    "unable_to_access": "Je hebt geen toegang tot",
+    "blocked_why_headline": "Waarom ben ik geblokkeerd?",
+    "blocked_why_detail": "Deze website maakt gebruik van een beveiligingsdienst om zichzelf te beschermen tegen online aanvallen. De actie die je zojuist hebt uitgevoerd, heeft de beveiligingsoplossing geactiveerd. Er zijn verschillende acties die deze blokkering kunnen veroorzaken, waaronder het indienen van een bepaald woord of zin, een SQL-opdracht of beschadigde gegevens.",
+    "blocked_resolve_headline": "Wat kan ik doen om dit op te lossen?",
+    "blocked_resolve_detail": "Cloudflare biedt een gebruiksvriendelijke tool om je IP-adres te deblokkeren. Download simpelweg de tool, voer het met één klik uit en je krijgt weer toegang tot de website die je probeert te bezoeken.",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "Je IP:",
+    "performance_security": "Prestaties en beveiliging door"
+  },
+  "tr": {
+    "block_headline": "Üzgünüz, engellendiniz.",
+    "unable_to_access": "Erişiminiz engellendi",
+    "blocked_why_headline": "Neden engellendim?",
+    "blocked_why_detail": "Bu web sitesi, çevrimiçi saldırılardan korunmak için bir güvenlik hizmeti kullanıyor. Az önce gerçekleştirdiğiniz işlem güvenlik çözümünü tetikledi. Belirli bir kelime veya ifade göndermek, SQL komutu ya da hatalı veri gönderimi gibi birkaç işlem bu engellemeyi tetikleyebilir.",
+    "blocked_resolve_headline": "Bunu nasıl çözebilirim?",
+    "blocked_resolve_detail": "Cloudflare, IP adresinizi engellemeden kurtarmanıza yardımcı olacak kullanıcı dostu bir araç sunuyor. Aracı indirip, tek tıklamayla çalıştırmanız yeterli ve erişmeye çalıştığınız siteye tekrar giriş yapabileceksiniz.",
+    "ray_id": "Cloudflare Ray ID:",
+    "your_ip": "IP adresiniz:",
+    "performance_security": "Performans ve güvenlik tarafından sağlanmaktadır"
+  }
+}

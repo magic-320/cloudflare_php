@@ -1,0 +1,107 @@
+{
+  "en": {
+    "headline": "Checking your browser before accessing {{domain}}",
+    "detail1": "This process is automatic. Your browser will redirect to your requested content shortly.",
+    "detail2": "Please allow up to 5 seconds...",
+    "ddos": "DDos protection by ",
+    "ray_id": "Ray ID: "
+  },
+  "es": {
+    "headline": "Verificando su navegador antes de acceder a {{domain}}",
+    "detail1": "Este proceso es automático. Su navegador lo redirigirá al contenido solicitado en breve.",
+    "detail2": "Por favor, espere hasta 5 segundos...",
+    "ddos": "Protección DDos por ",
+    "ray_id": "ID de Ray: "
+  },
+  "fr": {
+    "headline": "Vérification de votre navigateur avant d'accéder à {{domain}}",
+    "detail1": "Ce processus est automatique. Votre navigateur vous redirigera vers le contenu demandé sous peu.",
+    "detail2": "Veuillez patienter jusqu'à 5 secondes...",
+    "ddos": "Protection DDos par ",
+    "ray_id": "ID Ray : "
+  },
+  "de": {
+    "headline": "Überprüfung Ihres Browsers vor dem Zugriff auf {{domain}}",
+    "detail1": "Dieser Prozess ist automatisiert. Ihr Browser wird Sie in Kürze zu Ihrem gewünschten Inhalt umleiten.",
+    "detail2": "Bitte bis zu 5 Sekunden warten...",
+    "ddos": "DDos-Schutz durch ",
+    "ray_id": "Ray-ID: "
+  },
+  "it": {
+    "headline": "Controllo del tuo browser prima di accedere a {{domain}}",
+    "detail1": "Questo processo è automatico. Il tuo browser verrà reindirizzato al contenuto richiesto a breve.",
+    "detail2": "Si prega di attendere fino a 5 secondi...",
+    "ddos": "Protezione DDos di ",
+    "ray_id": "ID Ray: "
+  },
+  "pt": {
+    "headline": "Verificando seu navegador antes de acessar {{domain}}",
+    "detail1": "Esse processo é automático. Seu navegador será redirecionado para o conteúdo solicitado em breve.",
+    "detail2": "Por favor, aguarde até 5 segundos...",
+    "ddos": "Proteção DDos por ",
+    "ray_id": "ID do Ray: "
+  },
+  "zh": {
+    "headline": "在访问 {{domain}} 之前检查您的浏览器",
+    "detail1": "此过程是自动的。您的浏览器将很快重定向到您请求的内容。",
+    "detail2": "请允许最多 5 秒...",
+    "ddos": "由 DDoS 保护提供 ",
+    "ray_id": "Ray ID: "
+  },
+  "ja": {
+    "headline": "{{domain}} にアクセスする前にブラウザを確認しています",
+    "detail1": "このプロセスは自動です。ブラウザはすぐに要求されたコンテンツにリダイレクトします。",
+    "detail2": "最大 5 秒お待ちください...",
+    "ddos": "DDoS 保護提供元 ",
+    "ray_id": "Ray ID: "
+  },
+  "ru": {
+    "headline": "Проверка вашего браузера перед доступом к {{domain}}",
+    "detail1": "Этот процесс автоматический. Ваш браузер вскоре перенаправит вас на запрашиваемый контент.",
+    "detail2": "Пожалуйста, подождите до 5 секунд...",
+    "ddos": "Защита от DDoS от ",
+    "ray_id": "Ray ID: "
+  },
+  "ar": {
+    "headline": "التحقق من متصفحك قبل الوصول إلى {{domain}}",
+    "detail1": "هذه العملية تلقائية. سيوجهك متصفحك إلى المحتوى المطلوب قريبًا.",
+    "detail2": "يرجى الانتظار لمدة تصل إلى 5 ثوانٍ...",
+    "ddos": "حماية من DDoS بواسطة ",
+    "ray_id": "معرف Ray: "
+  },
+  "hi": {
+    "headline": "{{domain}} तक पहुँचने से पहले आपके ब्राउज़र की जाँच कर रहा हूँ",
+    "detail1": "यह प्रक्रिया स्वचालित है। आपका ब्राउज़र शीघ्र ही आपके अनुरोधित सामग्री पर पुनर्निर्देशित करेगा।",
+    "detail2": "कृपया 5 सेकंड तक प्रतीक्षा करें...",
+    "ddos": "DDoS सुरक्षा द्वारा ",
+    "ray_id": "Ray ID: "
+  },
+  "vn": {
+    "headline": "Đang kiểm tra trình duyệt của bạn trước khi truy cập {{domain}}",
+    "detail1": "Quá trình này là tự động. Trình duyệt của bạn sẽ tự động chuyển hướng đến nội dung bạn yêu cầu trong giây lát.",
+    "detail2": "Xin hãy chờ tối đa 5 giây...",
+    "ddos": "Bảo vệ DDoS bởi ",
+    "ray_id": "ID Ray: "
+  },
+  "ko": {
+    "headline": "{{domain}}를 방문하기 전에 브라우저를 확인하세요",
+    "detail1": "이 과정은 자동입니다. 귀하의 브라우저는 잠시 후에 귀하가 요청한 콘텐츠로 자동으로 리디렉션됩니다.",
+    "detail2": "최대 5초만 기다려주세요...",
+    "ddos": "DDoS 방어",
+    "ray_id": "ID Ray: "
+  },
+  "nl": {
+    "headline": "Controleer uw browser voordat u {{domain}} bezoekt",
+    "detail1": "Dit proces is automatisch. Uw browser zal binnen enkele ogenblikken automatisch doorverwijzen naar de door u opgevraagde inhoud.",
+    "detail2": "Wacht maximaal 5 seconden...",
+    "ddos": "DDoS-bescherming door",
+    "ray_id": "ID Ray: "
+  },
+  "tr": {
+    "headline": "{{domain}}'i ziyaret etmeden önce tarayıcınızı kontrol etme",
+    "detail1": "Bu işlem otomatiktir. Tarayıcınız kısa süre içinde otomatik olarak istediğiniz içeriğe yönlendirilecektir.",
+    "detail2": "Lütfen 5 saniyeye kadar bekleyin...",
+    "ddos": "DDoS koruması",
+    "ray_id": "ID Ray: "
+  }
+}

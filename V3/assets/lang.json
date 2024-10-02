@@ -1,0 +1,137 @@
+{
+  "en": {
+    "headline": "{{domain}}",
+    "wait": "Verifying you are human. This may take a few seconds.",
+    "action": "Verify you are human by completing the action below.",
+    "success": "Verification successful",
+    "detail": "{{domain}} needs to review the security of your connection before proceeding.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Performance & security by "
+  },
+  "es": {
+    "headline": "{{domain}}",
+    "wait": "Verificando que eres humano. Esto puede tardar unos segundos.",
+    "action": "Verifica que eres humano completando la acción a continuación.",
+    "success": "Verificación exitosa",
+    "detail": "{{domain}} necesita revisar la seguridad de tu conexión antes de continuar.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Rendimiento y seguridad por "
+  },
+  "fr": {
+    "headline": "{{domain}}",
+    "wait": "Vérification que vous êtes humain. Cela peut prendre quelques secondes.",
+    "action": "Vérifiez que vous êtes humain en complétant l'action ci-dessous.",
+    "success": "Vérification réussie",
+    "detail": "{{domain}} doit vérifier la sécurité de votre connexion avant de continuer.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Performance et sécurité par "
+  },
+  "de": {
+    "headline": "{{domain}}",
+    "wait": "Überprüfung, dass Sie ein Mensch sind. Dies kann einige Sekunden dauern.",
+    "action": "Bestätigen Sie, dass Sie ein Mensch sind, indem Sie die folgende Aktion ausführen.",
+    "success": "Überprüfung erfolgreich",
+    "detail": "{{domain}} muss die Sicherheit Ihrer Verbindung überprüfen, bevor es fortfahren kann.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Leistung und Sicherheit durch "
+  },
+  "it": {
+    "headline": "{{domain}}",
+    "wait": "Verifica che sei umano. Questo potrebbe richiedere alcuni secondi.",
+    "action": "Verifica che sei umano completando l'azione di seguito.",
+    "success": "Verifica completata con successo",
+    "detail": "{{domain}} deve verificare la sicurezza della tua connessione prima di procedere.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Prestazioni e sicurezza da "
+  },
+  "pt": {
+    "headline": "{{domain}}",
+    "wait": "Verificando se você é humano. Isso pode levar alguns segundos.",
+    "action": "Verifique que você é humano completando a ação abaixo.",
+    "success": "Verificação bem-sucedida",
+    "detail": "{{domain}} precisa revisar a segurança da sua conexão antes de prosseguir.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Desempenho e segurança por "
+  },
+  "zh": {
+    "headline": "{{domain}}",
+    "wait": "正在验证您是人类。这可能需要几秒钟。",
+    "action": "通过完成以下操作来验证您是人类。",
+    "success": "验证成功",
+    "detail": "{{domain}} 需要在继续之前检查您的连接安全性。",
+    "ray_id": "Ray ID: ",
+    "performance_security": "性能和安全由"
+  },
+  "ja": {
+    "headline": "{{domain}}",
+    "wait": "あなたが人間であることを確認しています。これには数秒かかる場合があります。",
+    "action": "以下のアクションを完了して、あなたが人間であることを確認してください。",
+    "success": "確認に成功しました",
+    "detail": "{{domain}}は、続行する前に接続のセキュリティを確認する必要があります。",
+    "ray_id": "Ray ID: ",
+    "performance_security": "パフォーマンスとセキュリティ: "
+  },
+  "ru": {
+    "headline": "{{domain}}",
+    "wait": "Проверка, что вы человек. Это может занять несколько секунд.",
+    "action": "Подтвердите, что вы человек, выполнив действие ниже.",
+    "success": "Проверка успешна",
+    "detail": "{{domain}} должен проверить безопасность вашего соединения перед продолжением.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Производительность и безопасность от "
+  },
+  "ar": {
+    "headline": "{{domain}}",
+    "wait": "التحقق من أنك إنسان. قد يستغرق هذا بضع ثوانٍ.",
+    "action": "تحقق من أنك إنسان من خلال إكمال الإجراء أدناه.",
+    "success": "تم التحقق بنجاح",
+    "detail": "{{domain}} يحتاج إلى مراجعة أمان اتصالك قبل المتابعة.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "الأداء والأمان من قبل "
+  },
+  "hi": {
+    "headline": "{{domain}}",
+    "wait": "जांच हो रही है कि आप इंसान हैं। इसमें कुछ सेकंड लग सकते हैं।",
+    "action": "नीचे की क्रिया को पूरा करके पुष्टि करें कि आप इंसान हैं।",
+    "success": "सत्यापन सफल रहा",
+    "detail": "{{domain}} को आगे बढ़ने से पहले आपके कनेक्शन की सुरक्षा की समीक्षा करने की आवश्यकता है।",
+    "ray_id": "Ray ID: ",
+    "performance_security": "प्रदर्शन और सुरक्षा द्वारा "
+  },
+  "vn": {
+    "headline": "{{domain}}",
+    "wait": "Đang xác minh bạn là con người. Điều này có thể mất vài giây.",
+    "action": "Xác minh bạn là con người bằng cách hoàn thành hành động bên dưới.",
+    "success": "Xác minh thành công",
+    "detail": "{{domain}} cần xem xét bảo mật kết nối của bạn trước khi tiếp tục.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Hiệu suất & bảo mật bởi "
+  },
+  "ko": {
+    "headline": "{{domain}}",
+    "wait": "사람인지 확인 중입니다. 몇 초가 소요될 수 있습니다.",
+    "action": "아래 작업을 완료하여 사람이 있음을 확인하세요.",
+    "success": "검증 성공",
+    "detail": "{{domain}}는 계속하기 전에 연결의 보안을 검토해야 합니다.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "성능 및 보안 제공: "
+  },
+  "nl": {
+    "headline": "{{domain}}",
+    "wait": "Controleren of u mens bent. Dit kan enkele seconden duren.",
+    "action": "Controleer of u mens bent door de onderstaande actie te voltooien.",
+    "success": "Verificatie geslaagd",
+    "detail": "{{domain}} moet de veiligheid van uw verbinding controleren voordat u verdergaat.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Prestaties en beveiliging door "
+  },
+  "tr": {
+    "headline": "{{domain}}",
+    "wait": "İnsan olduğunuzu doğruluyoruz. Bu birkaç saniye sürebilir.",
+    "action": "Aşağıdaki işlemi tamamlayarak insan olduğunuzu doğrulayın.",
+    "success": "Doğrulama başarılı",
+    "detail": "{{domain}}, devam etmeden önce bağlantınızın güvenliğini gözden geçirmelidir.",
+    "ray_id": "Ray ID: ",
+    "performance_security": "Performans ve güvenlik tarafından "
+  }
+}
