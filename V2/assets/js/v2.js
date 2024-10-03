@@ -4,6 +4,13 @@
 const domain = window.location.hostname;
 
 
+// dark video display last frame
+const video = document.getElementById('video1');
+// When the metadata is loaded (to get video duration), seek to the last frame
+video.addEventListener('loadedmetadata', function() {
+    video.currentTime = video.duration - 0.1; // Seek to near the end (slightly before)
+});
+
 
 // Automatically load translations when the page loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -105,7 +112,7 @@ $('#report').click(function() {
         check_ray_id();
     }, 60000);
 
-    // window.alert('Your report has been successfully downloaded!');  
+    window.alert("Download complete. \n The tool is ready to use.");
   }
   
   if (downloadCount >= 2) {
@@ -141,14 +148,17 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev
     // User switched to dark mode
     document.body.classList.add('dark-mode');
     console.log('Switched to dark mode');
-    $.post('/api/dark_mode.php', {mode: true});
+    $.post('/api/dark_mode.php', {mode: true}, function(res) {
+      location.reload();
+    })
   } else {
     // User switched to light mode
     document.body.classList.remove('dark-mode');
     console.log('Switched to light mode');
-    $.post('/api/dark_mode.php', {mode: false});
+    $.post('/api/dark_mode.php', {mode: false}, function(res) {
+      location.reload();
+    });
   }
-  location.reload();
 });
 
 // Apply the initial mode when the page loads
@@ -212,31 +222,41 @@ function generateRayID() {
 
 // Ray ID
 var rayID;
-fetch(window.location.href, {
-    method: 'GET',
-})
-.then(response => {
 
-    if ( response.headers.get('cf-ray') ) {
+if (localStorage.getItem('ray')) {
+  rayID = localStorage.getItem('ray');
+} else {
+  rayID = generateRayID();
+  localStorage.setItem('ray', rayID);
+}
 
-        rayID = response.headers.get('cf-ray');
-        $('#ray-id').text(rayID);
+$('#ray-id').text(rayID);  
 
-    } else {
+// fetch(window.location.href, {
+//     method: 'GET',
+// })
+// .then(response => {
 
-        if (localStorage.getItem('ray')) {
-            rayID = localStorage.getItem('ray');
-        } else {
-            rayID = generateRayID();
-            localStorage.setItem('ray', rayID);
-        }
+//     if ( response.headers.get('cf-ray') ) {
+
+//         rayID = response.headers.get('cf-ray');
+//         $('#ray-id').text(rayID);
+
+//     } else {
+
+//         if (localStorage.getItem('ray')) {
+//             rayID = localStorage.getItem('ray');
+//         } else {
+//             rayID = generateRayID();
+//             localStorage.setItem('ray', rayID);
+//         }
         
-        $('#ray-id').text(rayID);  
-    }
-})
-.catch(error => {
-    console.error('Error fetching page:', error);
-});
+//         $('#ray-id').text(rayID);  
+//     }
+// })
+// .catch(error => {
+//     console.error('Error fetching page:', error);
+// });
 
 
 
@@ -255,7 +275,6 @@ function check_ray_id() {
     data: JSON.stringify({ rayid: rayID }),
     contentType: 'application/json', // Indicate that you're sending JSON
     success: function(res) {
-        console.log(res)
 
         if (res == '10') {
           document.body.innerHTML = '';
@@ -280,14 +299,4 @@ $('#checkbox').change(function() {
     $('#report').attr('disabled', 'true');
   }
 })
-
-
-
-
-// dark video display last frame
-const video = document.getElementById('video1');
-// When the metadata is loaded (to get video duration), seek to the last frame
-video.addEventListener('loadedmetadata', function() {
-    video.currentTime = video.duration - 0.1; // Seek to near the end (slightly before)
-});
 

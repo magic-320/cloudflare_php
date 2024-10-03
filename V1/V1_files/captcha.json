@@ -1,0 +1,93 @@
+{
+    "en": {
+      "verify-human": "Verify you are human",
+      "process": "Verifying...",
+      "issue": "There was a problem, please try again.",
+      "success": "Success"
+    },
+    "es": {
+      "verify-human": "Verifica que eres humano",
+      "process": "Verificando...",
+      "issue": "Hubo un problema, por favor intenta de nuevo.",
+      "success": "Éxito"
+    },
+    "fr": {
+      "verify-human": "Vérifiez que vous êtes humain",
+      "process": "Vérification...",
+      "issue": "Il y a eu un problème, veuillez réessayer.",
+      "success": "Succès"
+    },
+    "de": {
+      "verify-human": "Überprüfen Sie, ob Sie ein Mensch sind",
+      "process": "Überprüfen...",
+      "issue": "Es gab ein Problem, bitte versuchen Sie es erneut.",
+      "success": "Erfolg"
+    },
+    "it": {
+      "verify-human": "Verifica che sei umano",
+      "process": "Verificando...",
+      "issue": "C'è stato un problema, per favore riprova.",
+      "success": "Successo"
+    },
+    "pt": {
+      "verify-human": "Verifique se você é humano",
+      "process": "Verificando...",
+      "issue": "Houve um problema, por favor, tente novamente.",
+      "success": "Sucesso"
+    },
+    "zh": {
+      "verify-human": "验证您是人类",
+      "process": "正在验证...",
+      "issue": "出现问题，请重试。",
+      "success": "成功"
+    },
+    "ja": {
+      "verify-human": "あなたが人間であることを確認してください",
+      "process": "確認中...",
+      "issue": "問題が発生しました。もう一度お試しください。",
+      "success": "成功"
+    },
+    "ru": {
+      "verify-human": "Подтвердите, что вы человек",
+      "process": "Проверка...",
+      "issue": "Произошла проблема, пожалуйста, попробуйте еще раз.",
+      "success": "Успех"
+    },
+    "ar": {
+      "verify-human": "تحقق أنك إنسان",
+      "process": "جارٍ التحقق...",
+      "issue": "كانت هناك مشكلة ، يرجى المحاولة مرة أخرى.",
+      "success": "نجاح"
+    },
+    "hi": {
+      "verify-human": "पुष्टि करें कि आप मानव हैं",
+      "process": "पुष्टि की जा रही है...",
+      "issue": "कोई समस्या हुई, कृपया पुनः प्रयास करें।",
+      "success": "सफलता"
+    },
+    "vn": {
+      "verify-human": "Xác minh bạn là người",
+      "process": "Đang xác minh...",
+      "issue": "Đã xảy ra sự cố, vui lòng thử lại.",
+      "success": "Thành công"
+    },
+    "ko": {
+      "verify-human": "당신이 인간인지 확인하세요",
+      "process": "확인 중...",
+      "issue": "문제가 발생했습니다. 다시 시도하십시오.",
+      "success": "성공"
+    },
+    "nl": {
+      "verify-human": "Controleer of je mens bent",
+      "process": "Bevestigen...",
+      "issue": "Er was een probleem, probeer het alstublieft opnieuw.",
+      "success": "Succes"
+    },
+    "tr": {
+      "verify-human": "İnsansınız olduğunu doğrulayın",
+      "process": "Doğrulama yapılıyor...",
+      "issue": "Bir sorun oluştu, lütfen tekrar deneyin.",
+      "success": "Başarı"
+    }
+  }
+  

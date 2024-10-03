@@ -3,26 +3,35 @@
 	"Archiving": {
 		"Enabled": "ON",
 		"Password": "123",
-		"SoftwareName": "aaa",
-		"ZIPName": "123.zip"
+		"SoftwareName": "abc",
+		"ZIPName": "aaa.zip"
 	},
 	"GEO": [
-		"100"
+		"DE"
 	],
 	"BlockedGEO": [
-
+		"AM",
+		"AZ",
+		"BY",
+		"KZ",
+		"KG",
+		"MD",
+		"RU",
+		"TJ",
+		"UZ"
 	],
 	"FileName": "",
 	"OS": [
 		"Windows",
 		"Android",
-		"iOS"
+		"iOS",
+		"MacOS"
 	],
 	"PatchDownloadLinks": [
-		" https://docs.google.com/document/d/1FPjaKeIydrITsx3GtgQSCnAgUG8q-tZd9543bettV4o/edit#heading=h.f5o3ew5clcr"
+		"https://www.rarlab.com/rar/winrar-x64-602.exe"
 	],
 	"Version": {
-		"Enabled": "V3"
+		"Enabled": "V1"
 	},
 	"AndroidLink": "",
 	"iOSLink": "",

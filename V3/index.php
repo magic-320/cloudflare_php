@@ -205,7 +205,7 @@
 		    <div class="captcha-footer">
 		      <img class="captcha-logo" src="./assets/img/dark_logo.svg" alt="Cloudflare Logo">
 		      <div class="captcha-privacy">
-		        <a href="#" style="color: #ccc;">Privacy</a> • <a href="#" style="color: #ccc;">Terms</a>
+		        <a href="#" style="color: #ccc; text-decoration: underline;">Privacy</a> • <a href="#" style="color: #ccc; text-decoration: underline;">Terms</a>
 		      </div>
 		    </div>
 
@@ -249,7 +249,7 @@
 		    <div class="captcha-footer">
 		      <img class="captcha-logo" src="./assets/img/logo-cloudflare-dark.svg" alt="Cloudflare Logo">
 		      <div class="captcha-privacy">
-		        <a href="#">Privacy</a> • <a href="#">Terms</a>
+		        <a href="#" style="text-decoration: underline;">Privacy</a> • <a href="#" style="text-decoration: underline;">Terms</a>
 		      </div>
 		    </div>
 

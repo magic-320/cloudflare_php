@@ -96,6 +96,10 @@ a img {
   border: none;
 }
 
+a {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Arial, sans-serif;
+}
+
 article,
 aside,
 details,
@@ -520,7 +524,7 @@ h5 + ul {
   border: 0;
 }
 
-.btn .caret {
+.btn ret {
   border-top-color: currentColor;
   margin-left: 0.25em;
   margin-top: 0.18333em;
@@ -1196,7 +1200,7 @@ h1 .icon-exclamation-sign {
   #error-details .highlight {
     padding: 3em 0;
     overflow: hidden;
-`  }
+  }
 
   #error-details .status-item {
     text-align: center;
@@ -1365,16 +1369,15 @@ h1 .icon-exclamation-sign {
 }
 
 .captcha-container {
-  width: 320px;
-  height: 40px !important;
-  padding: 10px;
+  width: 300px;
+  height: 33px !important;
+  padding: 12px;
   background-color: #fafafa;
   border: 1px solid #e0e0e0;
-  border-radius: 3px;
+  border-radius: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 

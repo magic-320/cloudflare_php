@@ -1,8 +1,11 @@
 <?php
 
-header('Access-Control-Allow-Origin: *'); // Adjust this to your React app's URL
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+// CORS headers for actual requests
+header("Access-Control-Allow-Origin: *"); // Replace with your actual domain
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");  // Methods allowed
+header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Headers allowed
+header("Access-Control-Allow-Credentials: true"); // If you need to allow cookies
+
 // Set content type to JSON
 header('Content-Type: application/json');
 
