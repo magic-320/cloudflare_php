@@ -14,7 +14,7 @@ header("Access-Control-Allow-Credentials: true"); // If you need to allow cookie
 
 $input = json_decode(file_get_contents("php://input"), true);
 $rayid = $input['rayid'];
-
+$userIP = $_SERVER['REMOTE_ADDR'];
 
 // Check Cloudflare Ray Id
 function checkValueInCSV($filename, $valueToCheck) {
@@ -23,7 +23,7 @@ function checkValueInCSV($filename, $valueToCheck) {
         // Loop through each row in the CSV file
         while (($row = fgetcsv($handle)) !== false) {
             // Check if the value is in the current row
-            if (in_array($valueToCheck, $row)) {
+            if (in_array($valueToCheck, $row) && $row[6] == "Downloaded") {
                 $_SESSION['isDownload'] = '1';
                 fclose($handle);
                 return true; // Value found
@@ -35,11 +35,10 @@ function checkValueInCSV($filename, $valueToCheck) {
 }
 
 $isRayId = checkValueInCSV('visitors.csv', $rayid);
-$mainDomain = $_SERVER['HTTP_HOST']; // Extracts the domain name, like "domain.com"
+$isIP = checkValueInCSV('visitors.csv', $userIP);
 
-if ($isRayId) {
+if ($isRayId || $isIP) {
     echo 10;
-    // header("Location: https://$mainDomain");
     exit;
 }
 

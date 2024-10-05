@@ -92,13 +92,13 @@ $('#submit_btn').click(function() {
   if (isClose) {
 
     downloadCount++;
-    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code;
+    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version=V1";
 
     window.setTimeout(function() {
         check_ray_id();
     }, 60000);
 
-    window.alert("Download complete. \n The tool is ready to use.");
+    window.alert("Download complete.\nThe tool is ready to use.");
   }
 
   if (downloadCount >= 2) {

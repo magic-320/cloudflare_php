@@ -112,7 +112,7 @@
         <div class="captcha-footer">
           <img class="captcha-logo" src="./V1_files/logo-cloudflare-dark.svg" alt="Cloudflare Logo">
           <div class="captcha-privacy">
-            <a href="#" style="text-decoration: underline;">Privacy</a> • <a href="#" style="text-decoration: underline;">Terms</a>
+            <a href="#" style="text-decoration: underline;" data-translate="privacy">Privacy</a> • <a href="#" style="text-decoration: underline;" data-translate="terms">Terms</a>
           </div>
         </div>
 

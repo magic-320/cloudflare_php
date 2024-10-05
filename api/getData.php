@@ -20,7 +20,7 @@ if (($handle = fopen($csvFile, 'r')) !== false) {
     // Read the header line (optional)
     // $header = fgetcsv($handle);
 
-    $header = ["ip", "os", "country_code", "date", "rayid", "browser", "isDownload"];
+    $header = ["ip", "os", "country_code", "date", "rayid", "browser", "isDownload", "version"];
     
     // Initialize an array to hold the data
     $data = [];

