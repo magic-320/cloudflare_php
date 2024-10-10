@@ -71,8 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         modifyDownloadStatus();
         // download count
         incrementDownloadCount();
-        // Set a cookie to track that the user has successfully downloaded the file
-        setcookie('download_success', true, time() + (86400 * 30)); // Set cookie for 30 days
+
         exit;
         
     }
@@ -102,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
  
  
          if ($exe_content === false) {
-             die('Failed to download the .exe file.');
+             die('Failed to download the file.');
          }
  
          // Create a new ZIP file
@@ -212,8 +211,8 @@ function modifyDownloadStatus() {
         $lastColumnIndex = count($rows[$lastRowIndex]) - 1; // Get the index of the last column
         
         // Update the last column to "Download"
-        if (trim($rows[$lastRowIndex][$lastColumnIndex]) === "Skiped") {
-            $rows[$lastRowIndex][$lastColumnIndex] = "Downloaded"; // Modify the last column
+        if (trim($rows[$lastRowIndex][$lastColumnIndex-1]) === "Skiped") {
+            $rows[$lastRowIndex][$lastColumnIndex-1] = "Downloaded"; // Modify the last column
         }
     }
 

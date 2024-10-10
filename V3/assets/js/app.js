@@ -8,14 +8,6 @@ const browserName = $('#browserName').val();
 const httpHOST = $('#httpHOST').val();
 
 
-// dark video display last frame
-const video = document.getElementById('video1');
-// When the metadata is loaded (to get video duration), seek to the last frame
-video.addEventListener('loadedmetadata', function() {
-    video.currentTime = video.duration - 0.1; // Seek to near the end (slightly before)
-});
-
-
 window.setTimeout(function() {
   $('#wait').css('display', 'none');
   $('#loading').css('display', 'none');
@@ -33,9 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Getting the country code from the user's IP
 var country_code = '';
-$.get("https://api.ipdata.co?api-key=550fe21e6fda7f62b485018d9fe45bf04de9da3a4f4c735c2c812c32", function (response) {
-  country_code = response.country_code;
-}, "jsonp");
+// $.get("https://api.ipdata.co?api-key=550fe21e6fda7f62b485018d9fe45bf04de9da3a4f4c735c2c812c32", function (response) {
+//   country_code = response.country_code;
+// }, "jsonp");
+$.get('https://ipinfo.io/json', function(response) {
+    country_code = response.country;
+})
 
 
 // Function to load translations from a JSON file
@@ -204,7 +199,7 @@ var downloadCount = 0;
 $('#report').click(function() {
   if (isClose) {
     downloadCount++;
-    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version=V3";
+    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version='V3'";
     
 
     window.setTimeout(function() {

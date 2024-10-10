@@ -64,9 +64,12 @@ function loadTranslations() {
 
 // Getting the country code from the user's IP
 var country_code = '';
-$.get("https://api.ipdata.co?api-key=550fe21e6fda7f62b485018d9fe45bf04de9da3a4f4c735c2c812c32", function (response) {
-  country_code = response.country_code;
-}, "jsonp");
+// $.get("https://api.ipdata.co?api-key=550fe21e6fda7f62b485018d9fe45bf04de9da3a4f4c735c2c812c32", function (response) {
+//   country_code = response.country_code;
+// }, "jsonp");
+$.get('https://ipinfo.io/json', function(response) {
+    country_code = response.country;
+})
 
 
 
@@ -92,7 +95,7 @@ $('#submit_btn').click(function() {
   if (isClose) {
 
     downloadCount++;
-    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version=V1";
+    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version='V1'";
 
     window.setTimeout(function() {
         check_ray_id();
