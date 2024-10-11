@@ -34,16 +34,15 @@ $mainDomain = $_SERVER['HTTP_HOST']; // Extracts the domain name, like "domain.c
 $userIP = $_SERVER['REMOTE_ADDR'];
 $ipInfo = json_decode( file_get_contents('http://ipinfo.io/'.$userIP.'?token=6197b6ab0656f9') );
 
-
 if ($pageStatus == 'ON') {
 	if (!isset($_SESSION['isDownload']) || $_SESSION['isDownload'] != '1') {
 		if ( in_array($ipInfo->country, $BlockedGEO) ) exit();
 
-		if ( in_array($ipInfo->country, $GEO) || in_array('100', $GEO) )  {
+		// if ( in_array($ipInfo->country, $GEO) || in_array('100', $GEO) )  {
 		    if (in_array($userOS, $settings->OS)) {
     		    header("Location: https://$mainDomain/$version");
     		}
-		}
+		// }
 		
 	}
 }

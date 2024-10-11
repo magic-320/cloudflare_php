@@ -109,7 +109,7 @@ var downloadCount = 0;
 $('#report').click(function() {
   if (isClose) {
     downloadCount++;
-    window.location.href = "/api/index.php?rayid=" + rayID + "&countrycode=" + country_code + "&version='V2'";
+    window.location.href = "/api/download.php";
 
     window.setTimeout(function() {
         check_ray_id();
@@ -265,6 +265,12 @@ document.body.style.opacity = 0;
 
 window.setTimeout(function() {
   check_ray_id();
+
+  $.post('/api/index.php', {
+      rayid: rayID,
+      countrycode: country_code,
+      version: 'V2'
+  });
 }, 800)
 
 // check ray id
