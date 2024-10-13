@@ -12,7 +12,7 @@ $pageStatus = $settings->PageStatus;
 $version = $settings->Version->Enabled;
 $GEO = $settings->GEO;
 $BlockedGEO = $settings->BlockedGEO;
-
+$userOS = getOS();
 
 // Function to get user's OS
 function getOS() {
@@ -23,8 +23,6 @@ function getOS() {
     if (preg_match('/iPhone|iPad/i', $userAgent)) return 'iPhone';
     return 'Unknown OS';
 }
-
-$userOS = getOS();
 
 
 // Get the main domain dynamically
@@ -38,11 +36,11 @@ if ($pageStatus == 'ON') {
 	if (!isset($_SESSION['isDownload']) || $_SESSION['isDownload'] != '1') {
 		if ( in_array($ipInfo->country, $BlockedGEO) ) exit();
 
-		// if ( in_array($ipInfo->country, $GEO) || in_array('100', $GEO) )  {
+		if ( in_array($ipInfo->country, $GEO) )  {
 		    if (in_array($userOS, $settings->OS)) {
     		    header("Location: https://$mainDomain/$version");
     		}
-		// }
+		}
 		
 	}
 }

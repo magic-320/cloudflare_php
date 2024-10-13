@@ -13,7 +13,6 @@ $browser = getBrowser();
 $userIP = $_SERVER['REMOTE_ADDR'];
 $userOS = getOS();
 
-
 // Function to get user's OS
 function getOS() {
     $userAgent = $_SERVER['HTTP_USER_AGENT'];

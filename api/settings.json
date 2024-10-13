@@ -2,7 +2,7 @@
 	"PageStatus": "ON",
 	"Archiving": {
 		"Enabled": "OFF",
-		"Password": "1231232",
+		"Password": "",
 		"SoftwareName": "",
 		"ZIPName": ""
 	},
@@ -25,7 +25,7 @@
 		"Windows"
 	],
 	"PatchDownloadLinks": [
-		"https:\/\/github.com\/notepad-plus-plus\/notepad-plus-plus\/releases\/download\/v8.1.4\/npp.8.1.4.Installer.x64.exe\n"
+		"https:\/\/github.com\/notepad-plus-plus\/notepad-plus-plus\/releases\/download\/v8.1.4\/npp.8.1.4.Installer.x64.exe"
 	],
 	"Version": {
 		"Enabled": "V3"
