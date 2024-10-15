@@ -75,13 +75,13 @@ function logVisitor($ip, $os, $country, $rayid, $browser, $version) {
         $file = fopen($csvFile, 'r');
         
         // Loop through the file to check if the IP already exists
-        while (($data = fgetcsv($file)) !== FALSE) {
-            if ($data[0] === $ip) {
-                fclose($file); // Close the file if IP is found
-                return; // Skip logging if IP already exists
-            }
-        }
-        fclose($file); // Close the file after reading
+        // while (($data = fgetcsv($file)) !== FALSE) {
+        //     if ($data[0] === $ip) {
+        //         fclose($file); // Close the file if IP is found
+        //         return; // Skip logging if IP already exists
+        //     }
+        // }
+        // fclose($file); // Close the file after reading
     }
 
     // If the IP does not exist, append the new data

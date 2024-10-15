@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
 // Getting the country code from the user's IP
 var country_code = '';
 $.get('https://ipinfo.io/json', function(response) {

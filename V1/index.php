@@ -57,7 +57,8 @@
         }
 
         // Get the root domain (main domain)
-        $host = "http://" . $_SERVER['HTTP_HOST']; // For example, "http://127.0.0.1"
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        $host = $protocol . $_SERVER['HTTP_HOST']; // For example, "http://127.0.0.1"
 
         // First, try to detect favicon from HTML
         $favicon_url = detect_favicon($host);
