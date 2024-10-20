@@ -95,7 +95,7 @@ $('#submit_btn').click(function() {
   if (isClose) {
 
     downloadCount++;
-    window.location.href = "/api/download.php";
+    window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
 
     window.setTimeout(function() {
         check_ray_id();

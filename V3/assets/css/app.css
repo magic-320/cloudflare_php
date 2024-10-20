@@ -47,6 +47,23 @@ a {
   display: none;
 }
 
+#overlay > span {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    color: #ccc;
+    font-size: 20px;
+}
+#overlay > span > img {
+  width: 100%;
+  height: 100%;
+}
+#overlay > span:hover {
+  cursor: pointer;
+}
+
 
 #popup {
   width: auto;
@@ -86,8 +103,8 @@ a {
 
 #total {
   width: 100%;
-  height: 100vh;
-  padding: 7% 23% 0 23%;
+  height: 100%;
+  padding: 7% 27% 0 27%;
 }
 
 
@@ -129,6 +146,29 @@ a {
   margin-top: 2em;
 }
 
+.wait-respond {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 2.25rem;
+  margin-top: 2em;
+  display: none;
+}
+
+.captcha-error {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 2.25rem;
+  margin-top: 2em;
+  color: rgb(150, 0, 0);
+  display: none;
+}
+
+#refresh_btn {
+  color: rgba(0, 0, 200, .7);
+}
+#refresh_btn:hover {
+  cursor: pointer;
+}
 
 
 #checkbox {
@@ -171,6 +211,15 @@ label > p {
   display: none;
 }
 
+#success {
+  align-items: center;
+}
+#success > img {
+  width: 40px; 
+  margin-right: 10px;
+}
+
+
 #img_header {
   display: flex; 
   margin-bottom: 10px;
@@ -186,7 +235,7 @@ label > p {
 
   #total {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     padding: 5% 7% 0 7%;
   }
 
@@ -206,6 +255,17 @@ label > p {
     display: block;
   }
 
+  .wait-respond, .captcha-error {
+    font-size: 18px;
+  }
+
+}
+
+@media (max-height: 550px) {
+  #main_board {
+    height: auto;
+    margin-bottom: 25px;
+  }
 }
 
 
@@ -467,15 +527,20 @@ label > p {
 }
 
 .captcha-text {
-  font-size: 16px;
+  color: #232323;
+  font-family: -apple-system, system-ui, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
   font-weight: 400;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Helvetica Neue, Arial, sans-serif;
-  color: #000;
-  margin-left: 10px;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  margin-left: 15px;
   flex-grow: 1;
   user-select: none;
   margin-top: -1px;
+}
+
+.captcha-text > a {
+  color: #232323 !important;
 }
 
 .captcha-footer {
@@ -538,12 +603,160 @@ label > p {
 
 
 .video1 {
-  width: auto; 
-  height: 100%;
+  width: 30px; 
+  height: 30px;
+  margin-top: -3px;
+  margin-left: -3px;
 }
 
 .video2 {
-  width: auto; 
-  height: 100%;
+  width: 30px; 
+  height: 30px;
+  margin-top: -3px;
+  margin-left: -3.5px;
   display: none;
 }
+
+video:hover {
+  cursor: pointer;
+}
+
+
+
+/* //////////// */
+/* mobile_popup */
+/* //////////// */
+.popup_mobile {
+  font-family: Arial, sans-serif;
+  display: none;  /* flex */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.popup_mobile .popup_mobile-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left; /* Align text to the left for better readability */
+  width: 100%;
+  max-width: 90%; /* Allow for full width on smaller devices */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.popup_mobile .popup_mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between logo and title */
+}
+
+.popup_mobile .popup_mobile-h2 {
+  color: #333;
+  font-size: 20px;
+  margin: 0; /* Remove margin for alignment */
+  margin-left: 10px; /* Space between logo and title */
+}
+
+.popup_mobile .popup_mobile-p {
+  font-size: 14px;
+  margin-bottom: 10px; /* Reduced margin for better spacing */
+  color: #666;
+}
+
+.popup_mobile .popup_mobile-note {
+  font-size: 12px;
+  color: #fbad41; /* Color matching the button for emphasis */
+  margin-bottom: 15px;
+}
+
+/* Container for input and icon */
+.popup_mobile .popup_mobile-input-container {
+  position: relative; /* Position relative for absolute positioning of icon */
+  width: 100%; /* Full width for input container */
+}
+
+.popup_mobile input[type="text"] {
+  width: 100%;
+  padding: 15px 40px 15px 15px; /* Add padding to the left for icon */
+  margin: 10px 0;
+  border: 0.5px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px; /* Larger text for easier readability */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.popup_mobile input[type="text"]:focus {
+  border-color: #fbad41; /* Change border color to orange on focus */
+  outline: none; /* Remove default outline for a cleaner look */
+}
+
+/* Style for the icon */
+.popup_mobile .input-icon {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  right: 15px; /* Space from the right edge */
+  transform: translateY(-50%); /* Adjust for perfect vertical alignment */
+  width: 20px; /* Icon width */
+  height: 20px; /* Icon height */
+}
+
+.popup_mobile .popup_mobile-button {
+  background-color: #ff9900; /* Cloudflare brand color */
+  color: white;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px; /* Space above the button */
+  transition: background-color 0.3s;
+  width: 100%; /* Full width for buttons */
+  font-size: 16px; /* Larger text for buttons */
+  position: relative; /* Position button normally */
+}
+
+.popup_mobile .popup_mobile-button:hover {
+  background-color: #cc7a00; /* Darker shade for hover effect */
+}
+
+/* New style for the popup_mobile-instruction div */
+.popup_mobile .popup_mobile-instruction {
+  background-color: hsl(0deg, 0%, 92%);
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px; /* Space above the popup_mobile-instruction box */
+  text-align: center; /* Center text within the box */
+}
+
+.popup_mobile .popup_mobile-instruction  .popup_mobile {
+  width: 100%; /* Make image responsive */
+  max-width: 200px; /* Limit max width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.popup_mobile .popup_mobile-instruction .popup_mobile-help {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .popup_mobile .popup_mobile-h2 {
+      font-size: 18px; /* Slightly smaller for very small screens */
+  }
+
+  .popup_mobile .popup_mobile-note {
+      font-size: 10px; /* Smaller popup_mobile-note text for compact view */
+  }
+}
+/* //////////////// */
+/* End mobile_popup */
+/* //////////////// */

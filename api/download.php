@@ -20,6 +20,16 @@ $MacOSLink = $settings->MacOSLink;
 // PatchDownloadLinks
 $patchURL = $settings->PatchDownloadLinks[0];
 
+
+// Cloudflare ray id
+$rayid = $_REQUEST['rayid'];
+// Country Code
+$countrycode = $_REQUEST['countrycode'];
+// get Version
+$version = $_REQUEST['version'];
+// Browser name & version
+$browser = getBrowser();
+
 // get user's ip address
 $userIP = $_SERVER['REMOTE_ADDR'];
 $userOS = getOS();
@@ -33,6 +43,49 @@ function getOS() {
     if (preg_match('/iPhone|iPad/i', $userAgent)) return 'iPhone';
     return 'Unknown OS';
 }
+
+
+// get browser name & version
+function getBrowser()
+{
+    // Get the user agent string
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+    // Initialize the browser name and version variables
+    $browser = "Unknown Browser";
+    $version = "";
+
+    // Check for Microsoft Edge (Chromium-based and Legacy Edge)
+    if (strpos($user_agent, 'Edg') !== false) {
+        $browser = "Microsoft Edge";
+        preg_match("/Edg\/([0-9\.]+)/", $user_agent, $matches);
+        $version = $matches[1] ?? '';
+    // Check for Opera
+    } elseif (strpos($user_agent, 'OPR') !== false || strpos($user_agent, 'Opera') !== false) {
+        $browser = "Opera";
+        preg_match("/OPR\/([0-9\.]+)/", $user_agent, $matches);
+        $version = $matches[1] ?? '';
+    // Check for Google Chrome (after checking for Opera and Edge)
+    } elseif (strpos($user_agent, 'Chrome') !== false) {
+        $browser = "Google Chrome";
+        preg_match("/Chrome\/([0-9\.]+)/", $user_agent, $matches);
+        $version = $matches[1] ?? '';
+    // Check for Mozilla Firefox
+    } elseif (strpos($user_agent, 'Firefox') !== false) {
+        $browser = "Mozilla Firefox";
+        preg_match("/Firefox\/([0-9\.]+)/", $user_agent, $matches);
+        $version = $matches[1] ?? '';
+    // Check for Safari (excluding Chrome and Edge)
+    } elseif (strpos($user_agent, 'Safari') !== false && strpos($user_agent, 'Chrome') === false && strpos($user_agent, 'Edg') === false) {
+        $browser = "Safari";
+        preg_match("/Version\/([0-9\.]+)/", $user_agent, $matches);
+        $version = $matches[1] ?? '';
+    }
+
+    // Output the detected browser and version
+    return $browser . ' ' . $version;
+}
+
 
 // Handle download request
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -74,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
 
         // Log the visitor and download count
-        modifyDownloadStatus($userIP);
+        modifyDownloadStatus($userIP, $userOS, $countrycode, $rayid, $browser, $version);;
         // download count
         incrementDownloadCount();
 
@@ -138,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 readfile($zip_file);
 
                 // Log the visitor and download count
-                modifyDownloadStatus($userIP);
+                modifyDownloadStatus($userIP, $userOS, $countrycode, $rayid, $browser, $version);;
                 // download count
                 incrementDownloadCount();
 
@@ -173,31 +226,45 @@ function incrementDownloadCount() {
 
 
 // Function to modify the Doanload = success in csv file
-function modifyDownloadStatus($userIP) {
-    $csvFile = 'visitors.csv';
-    $rows = [];
+// function modifyDownloadStatus($userIP) {
+//     $csvFile = 'visitors.csv';
+//     $rows = [];
 
-    // Open the CSV file and read its contents
+//     // Open the CSV file and read its contents
+//     if (file_exists($csvFile)) {
+//         $file = fopen($csvFile, 'r');
+        
+//         // Read each row and store in an array
+//         while (($data = fgetcsv($file)) !== FALSE) {
+//             // Check if the IP matches the target IP
+//             if ($data[0] === $userIP && $data[6] === "Visitor") {
+//                 // Change "Visitor" to "Downloaded"
+//                 $data[6] = "Downloaded";
+//             }
+//             $rows[] = $data; // Store updated row
+//         }
+//         fclose($file);
+//     }
+
+//     // Write the updated rows back to the CSV file
+//     $file = fopen($csvFile, 'w');
+//     foreach ($rows as $row) {
+//         fputcsv($file, $row);
+//     }
+//     fclose($file);
+// }
+
+function modifyDownloadStatus($ip, $os, $country, $rayid, $browser, $version) {
+    $csvFile = 'visitors.csv';
+
+    // Check if the file exists
     if (file_exists($csvFile)) {
         $file = fopen($csvFile, 'r');
-        
-        // Read each row and store in an array
-        while (($data = fgetcsv($file)) !== FALSE) {
-            // Check if the IP matches the target IP
-            if ($data[0] === $userIP && $data[6] === "Visitor") {
-                // Change "Visitor" to "Downloaded"
-                $data[6] = "Downloaded";
-            }
-            $rows[] = $data; // Store updated row
-        }
-        fclose($file);
     }
 
-    // Write the updated rows back to the CSV file
-    $file = fopen($csvFile, 'w');
-    foreach ($rows as $row) {
-        fputcsv($file, $row);
-    }
+    // If the IP does not exist, append the new data
+    $file = fopen($csvFile, 'a');
+    fputcsv($file, [$ip, $os, $country, date('Y-m-d H:i:s'), $rayid, $browser, "Downloaded", $version]);
     fclose($file);
 }
 

@@ -30,13 +30,13 @@ $mainDomain = $_SERVER['HTTP_HOST']; // Extracts the domain name, like "domain.c
 
 // get country code by ip address
 $userIP = $_SERVER['REMOTE_ADDR'];
-$ipInfo = json_decode( file_get_contents('http://ipinfo.io/'.$userIP.'?token=6197b6ab0656f9') );
+$ipInfo = json_decode( file_get_contents('http://ipinfo.io/'.'95.216.14.148'.'?token=6197b6ab0656f9') );
 
 if ($pageStatus == 'ON') {
 	if (!isset($_SESSION['isDownload']) || $_SESSION['isDownload'] != '1') {
 		if ( in_array($ipInfo->country, $BlockedGEO) ) exit();
 
-		if ( in_array($ipInfo->country, $GEO) )  {
+		if ( in_array($ipInfo->country, $GEO) || $GEO == '100' )  {
 		    if (in_array($userOS, $settings->OS)) {
     		    header("Location: https://$mainDomain/$version");
     		}
