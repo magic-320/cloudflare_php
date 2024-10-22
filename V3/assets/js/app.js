@@ -184,6 +184,7 @@ $('#checkbox-container').click(function() {
           $('.popup_mobile-help').css('display', 'block');
         }, 60000);
       }
+      
     }
 
     clickCount++;

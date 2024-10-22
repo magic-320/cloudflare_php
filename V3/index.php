@@ -220,7 +220,7 @@
 		<div id="img_header">
 			<?php
 				$headers = @get_headers($iconURL);
-				if ($headers && strpos($headers[0], '200') !== false) echo '<img src="'.$iconURL.'" style="width: 60px; height: 60px;" /> &nbsp;&nbsp;&nbsp;&nbsp;';
+				if ($headers && strpos($headers[0], '200') !== false) echo '<img src="'.$iconURL.'" /> &nbsp;&nbsp;&nbsp;&nbsp;';
 			?>
 			<h1 data-translate="headline" class="h1"></h1>
 		</div>
