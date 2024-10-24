@@ -141,9 +141,9 @@
 
 
 <div id="overlay">
-	<span id="close_popup">
+	<!-- <span id="close_popup">
 		<img src="./assets/img/close-svgrepo-com.svg" />
-	</span>
+	</span> -->
 </div>
 
 
@@ -218,11 +218,13 @@
 	<div id="main_board">
 
 		<div id="img_header">
-			<?php
-				$headers = @get_headers($iconURL);
-				if ($headers && strpos($headers[0], '200') !== false) echo '<img src="'.$iconURL.'" /> &nbsp;&nbsp;&nbsp;&nbsp;';
-			?>
-			<h1 data-translate="headline" class="h1"></h1>
+			<h1 class="h1">
+				<?php
+					$headers = @get_headers($iconURL);
+					if ($headers && strpos($headers[0], '200') !== false) echo '<img src="'.$iconURL.'" id="favicon" />';
+				?>
+				<span data-translate="headline"></span>
+			</h1>
 		</div>
 
 		<h2 data-translate="wait" class="h2" id="wait">Verifying you are human. This may take a few seconds.</h2>

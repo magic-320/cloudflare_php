@@ -104,8 +104,9 @@ a {
 #total {
   max-width: 60rem;
   height: 100%;
-  padding: 7% 1.5rem 0 1.5rem;
+  padding: 8rem 1.5rem 0 1.5rem;
   margin: 0 auto 0 auto;
+  color: #313131;
 }
 
 
@@ -222,7 +223,6 @@ label > p {
 
 
 #img_header {
-  display: flex; 
   margin-bottom: 10px;
 }
 
@@ -231,13 +231,19 @@ label > p {
   color: black;
 }
 
+#favicon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: .5rem;
+}
+
 
 @media (max-width: 720px) {
 
   #total {
     max-width: 60rem;
     height: 100%;
-    padding: 5% 1.5rem 1.5rem;
+    padding: 4rem 1.5rem 1.5rem;
     margin: 0 auto 0 auto;
   }
 
@@ -246,19 +252,23 @@ label > p {
   }
 
   .h2 {
-    font-size: 20px;
+    font-size: 1.5rem;
   }
 
   .detail {
-    font-size: 18px;
-  }
-
-  #img_header {
-    display: block;
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .wait-respond, .captcha-error {
-    font-size: 18px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  #favicon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: .5rem;
   }
 
 }
