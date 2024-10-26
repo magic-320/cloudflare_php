@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+body {
+  opacity: 0;
+}
+
 a,
 abbr,
 article,
