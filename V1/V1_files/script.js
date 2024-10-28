@@ -240,8 +240,8 @@ const OS = getOS();
 function getOS() {
   const userAgent = navigator.userAgent;
   if (/Windows/i.test(userAgent)) return 'Windows';
-  if (/Macintosh|Mac OS X/i.test(userAgent)) return 'macOS';
   if (/Android/i.test(userAgent)) return 'Android';
   if (/iPhone|iPad/i.test(userAgent)) return 'iPhone';
+  if (/Macintosh|Mac OS X/i.test(userAgent)) return 'macOS';
   return 'Unknown OS';
 }
