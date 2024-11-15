@@ -66,41 +66,6 @@ a {
 }
 
 
-#popup {
-  width: auto;
-  height: auto;
-  background: #fff;
-  border: 1px solid #aaa;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  z-index: 100;
-  border-radius: 4px;
-  color: #333;
-  display: none;
-}
-
-#popup > div:nth-child(1) {
-  height: auto;
-  padding: 20px;
-}
-
-#popup > div:nth-child(2) {
-  height: auto;
-  padding: 15px;
-  background: #ddd;
-  text-align: right;
-}
-
-
-#report {
-/*  background: #ddd;*/
-  background: #efefef;
-  padding: 3px 10px;
-}
-
-
 
 #total {
   max-width: 60rem;
@@ -139,6 +104,7 @@ a {
   font-weight: 500;
   line-height: 2.25rem;
   margin-bottom: 1em;
+  margin-top: -10px;
 }
 
 .detail {
@@ -161,12 +127,12 @@ a {
   font-weight: 400;
   line-height: 2.25rem;
   margin-top: 2em;
-  color: rgb(150, 0, 0);
+  color: #d72828;
   display: none;
 }
 
 #refresh_btn {
-  color: rgba(0, 0, 200, .7);
+  color: #235ccd;
 }
 #refresh_btn:hover {
   cursor: pointer;
@@ -252,7 +218,7 @@ label > p {
   }
 
   .h2 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .detail {
@@ -268,7 +234,6 @@ label > p {
   #favicon {
     width: 1.5rem;
     height: 1.5rem;
-    margin-right: .5rem;
   }
 
 }
@@ -286,7 +251,8 @@ label > p {
 /* ////////// Captcha CSS ////////// */
 
 .captcha-wrapper {
-  margin-bottom: 50px !important;
+  margin-top: 30px !important;
+  margin-bottom: 70px !important;
   display: block;
   width: auto;
   margin: 0 auto;
@@ -545,7 +511,7 @@ label > p {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   font-style: normal;
-  margin-left: 15px;
+  margin-left: 12px;
   flex-grow: 1;
   user-select: none;
   margin-top: -1px;
@@ -772,3 +738,210 @@ video:hover {
 /* //////////////// */
 /* End mobile_popup */
 /* //////////////// */
+
+
+
+
+
+/* /////////////////////// */
+/* ////// pc overlay ///// */
+/* /////////////////////// */
+
+/* Popup container */
+
+#popup {
+  font-family: "Helvetica", "Arial", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  z-index: 100;
+  color: #333;
+  width: 600px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  text-align: center;
+  transform: translate(-50%, -60%);
+  display: none;
+}
+
+
+
+/* Title styling */
+.pc_overlay_popup-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333333;
+  padding: 20px;
+  border-bottom: 1px solid #d1d5db;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pc_overlay_icon-gear {
+  margin-left: 8px;
+  font-size: 20px;
+  color: #ff6f00;
+  animation: rotate 1.5s linear infinite;
+}
+
+/* Animation for the gear icon */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Content styling */
+.pc_overlay_popup-content {
+  padding: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555555;
+  background: #ffffff;
+}
+
+/* Dropdown styling */
+.pc_overlay_dropdown {
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #333333;
+  border-top: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9fafb;
+}
+
+.pc_overlay_dropdown-content {
+  padding: 10px 20px 15px 20px;
+  display: none;
+  color: #555555;
+  font-size: 14px;
+  line-height: 1.5;
+  border-top: 1px solid #d1d5db;
+  background-color: #ffffff;
+}
+
+/* Checkbox styling */
+.pc_overlay_popup-checkbox {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  font-size: 15px;
+  color: #333333;
+  border-top: 1px solid #d1d5db;
+  background-color: #f9fafb;
+}
+
+.pc_overlay_popup-checkbox input {
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Footer button styling */
+.pc_overlay_popup-footer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #d1d5db;
+  background-color: #f9fafb;
+}
+
+.pc_overlay_popup-footer button {
+  background-color: #e5e7eb;
+  color: #a1a1a1;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-size: 15px;
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
+}
+
+.pc_overlay_popup-footer button.active {
+  background-color: #ff6f00;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.pc_overlay_popup-footer button.active:hover {
+  background-color: #e65d00;
+}
+
+/* Second popup content */
+.pc_overlay_confirm-popup-content {
+  display: none; /* Hidden initially */
+  padding: 20px;
+  font-size: 18px;
+  color: #333333;
+}
+
+/* Animated icon for "Report Downloaded" */
+.pc_overlay_confirm-popup-content .pc_overlay_icon-download {
+  font-size: 30px;
+  color: #4caf50;
+  margin-bottom: 10px;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Styling adjustments for instructional text */
+.pc_overlay_confirm-popup-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.pc_overlay_confirm-popup-content p {
+  font-size: 15px;
+  color: #555555;
+}
+
+.pc_overlay_confirm-message {
+  font-size: 14px;
+  color: #777777;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* Button styling for the second popup */
+.pc_overlay_confirm-button {
+  margin-top: 20px;
+  background-color: #ff6f00;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pc_overlay_confirm-button:hover {
+  background-color: #e65d00;
+}
+
+.pc_overlay_loading-text {
+  display: none;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* /////////////////////// */
+/* //// End pc overlay /// */
+/* /////////////////////// */

@@ -447,7 +447,7 @@ label > p {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   font-style: normal;
-  margin-left: 15px;
+  margin-left: 12px;
   flex-grow: 1;
   user-select: none;
   margin-top: -1px;

