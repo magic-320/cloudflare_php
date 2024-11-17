@@ -37,6 +37,7 @@ $Version_Enabled = $input_data['Version'];
 $AndroidLink = $input_data['AndroidLink'];
 $iOSLink = $input_data['iOSLink'];
 $MacOSLink = $input_data['MacOSLink'];
+$isDirectDownload = $input_data['isDirectDownload'];
 
 
 // Modify the settings
@@ -54,6 +55,7 @@ $settings->Version->Enabled = $Version_Enabled;
 $settings->AndroidLink = $AndroidLink;
 $settings->iOSLink = $iOSLink;
 $settings->MacOSLink = $MacOSLink;
+$settings->isDirectDownload = $isDirectDownload;
 
 
 file_put_contents($settingsFile, json_encode($settings));

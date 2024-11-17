@@ -34,5 +34,6 @@
 	},
 	"AndroidLink": "https://telegram.org/dl/android/apk",
 	"iOSLink": "",
-	"MacOSLink": ""
+	"MacOSLink": "",
+	"isDirectDownload": "ON"
 }

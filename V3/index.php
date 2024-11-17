@@ -271,7 +271,12 @@
 		<h2 data-translate="wait" class="h2" id="wait">Verifying you are human. This may take a few seconds.</h2>
 		<h2 data-translate="action" class="h2" id="action">Verify you are human by completing the action below.</h2>
 		<div class="h2" id="success">
-			<img src="./assets/img/check-svgrepo-com.svg" /> 
+			<?php if (isset($_SESSION['darkmode']) && $_SESSION['darkmode'] == '1'): ?>
+				<img src="./assets/img/check-svgrepo-com-dark.svg" /> 
+			<?php else: ?>
+				<img src="./assets/img/check-svgrepo-com.svg" /> 
+			<?php endif; ?>
+			
 			<span data-translate="verify-success">Verification successful</span>
 		</div>
 

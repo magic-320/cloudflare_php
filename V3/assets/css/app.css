@@ -200,7 +200,6 @@ label > p {
 #favicon {
   width: 2rem;
   height: 2rem;
-  margin-right: .5rem;
 }
 
 
@@ -518,7 +517,7 @@ label > p {
 }
 
 .captcha-text > a {
-  color: #232323 !important;
+  color: #232323;
 }
 
 .captcha-footer {
@@ -803,6 +802,7 @@ video:hover {
   line-height: 1.6;
   color: #555555;
   background: #ffffff;
+  text-align: left;
 }
 
 /* Dropdown styling */
@@ -827,6 +827,7 @@ video:hover {
   line-height: 1.5;
   border-top: 1px solid #d1d5db;
   background-color: #ffffff;
+  text-align: left;
 }
 
 /* Checkbox styling */
@@ -838,6 +839,7 @@ video:hover {
   color: #333333;
   border-top: 1px solid #d1d5db;
   background-color: #f9fafb;
+  text-align: left;
 }
 
 .pc_overlay_popup-checkbox input {

