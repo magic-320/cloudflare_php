@@ -285,7 +285,11 @@ function download_file() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
+    $.post('/api/download.php', {
+      rayid: rayID,
+      countrycode: country_code,
+      version: 'V3'
+    });
   } else {
     window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V3';
   }

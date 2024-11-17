@@ -94,7 +94,11 @@ $('#submit_btn').click(function() {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
+      $.post('/api/download.php', {
+        rayid: rayID,
+        countrycode: country_code,
+        version: 'V1'
+      });
     } else {
       window.location.href = "/api/download.php?rayid=" + rayID + '&countrycode=' + country_code + '&version=V1';
     }

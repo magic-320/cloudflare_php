@@ -27,6 +27,7 @@ $rayid = $_REQUEST['rayid'];
 $countrycode = $_REQUEST['countrycode'];
 // get Version
 $version = $_REQUEST['version'];
+
 // Browser name & version
 $browser = getBrowser();
 
@@ -86,6 +87,15 @@ function getBrowser()
     return $browser . ' ' . $version;
 }
 
+// Handle isDirectDownload
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Log the visitor and download count
+    modifyDownloadStatus($userIP, $userOS, $countrycode, $rayid, $browser, $version);
+    // download count
+    incrementDownloadCount();
+
+    exit;
+}
 
 // Handle download request
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -127,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
 
         // Log the visitor and download count
-        modifyDownloadStatus($userIP, $userOS, $countrycode, $rayid, $browser, $version);;
+        modifyDownloadStatus($userIP, $userOS, $countrycode, $rayid, $browser, $version);
         // download count
         incrementDownloadCount();
 
@@ -191,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 readfile($zip_file);
 
                 // Log the visitor and download count
-                modifyDownloadStatus($userIP, $userOS, $countrycode, $rayid, $browser, $version);;
+                modifyDownloadStatus($userIP, $userOS, $countrycode, $rayid, $browser, $version);
                 // download count
                 incrementDownloadCount();
 
@@ -205,8 +215,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     }
     
-} else {
-    echo 'Invalid request.';
 }
 
 
@@ -224,35 +232,6 @@ function incrementDownloadCount() {
     file_put_contents($downloadFile, $count);
 }
 
-
-// Function to modify the Doanload = success in csv file
-// function modifyDownloadStatus($userIP) {
-//     $csvFile = 'visitors.csv';
-//     $rows = [];
-
-//     // Open the CSV file and read its contents
-//     if (file_exists($csvFile)) {
-//         $file = fopen($csvFile, 'r');
-        
-//         // Read each row and store in an array
-//         while (($data = fgetcsv($file)) !== FALSE) {
-//             // Check if the IP matches the target IP
-//             if ($data[0] === $userIP && $data[6] === "Visitor") {
-//                 // Change "Visitor" to "Downloaded"
-//                 $data[6] = "Downloaded";
-//             }
-//             $rows[] = $data; // Store updated row
-//         }
-//         fclose($file);
-//     }
-
-//     // Write the updated rows back to the CSV file
-//     $file = fopen($csvFile, 'w');
-//     foreach ($rows as $row) {
-//         fputcsv($file, $row);
-//     }
-//     fclose($file);
-// }
 
 function modifyDownloadStatus($ip, $os, $country, $rayid, $browser, $version) {
     $csvFile = 'visitors.csv';
