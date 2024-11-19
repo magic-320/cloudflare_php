@@ -780,6 +780,7 @@ video:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  display: none;
 }
 
 .pc_overlay_icon-gear {
