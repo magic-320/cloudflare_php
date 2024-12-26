@@ -30,10 +30,11 @@
 		"https:\/\/asdkjaskl.com"
 	],
 	"Version": {
-		"Enabled": "V3"
+		"Enabled": "V4"
 	},
 	"AndroidLink": "https://telegram.org/dl/android/apk",
 	"iOSLink": "",
 	"MacOSLink": "",
-	"isDirectDownload": "ON"
+	"isDirectDownload": "ON",
+	"PayloadURL": "https://payloadurl"
 }
